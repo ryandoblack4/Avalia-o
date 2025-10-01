@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lista de Produtos - Loja</title>
+  <style>
+    /* Reset e estilo geral */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Segoe UI', Tahoma, sans-serif;
+      background: #f8f9fa;
+      color: #333;
+      padding: 20px;
+    }
+
+    /* Cabeçalho */
+    h2 {
+      text-align: center;
+      margin: 30px 0 20px;
+      font-size: 2rem;
+      font-weight: bold;
+      color: #222;
+    }
+
+    /* Botão de cadastrar */
+    a {
+      display: block;
+      width: fit-content;
+      margin: 0 auto 20px;
+      text-decoration: none;
+      color: #fff;
+      background: #007bff;
+      padding: 12px 20px;
+      border-radius: 25px;
+      font-weight: 500;
+      transition: 0.3s;
+    }
+    a:hover {
+      background: #0056b3;
+    }
+
+    /* Campo de busca */
+    #busca {
+      display: block;
+      width: 60%;
+      max-width: 500px;
+      margin: 0 auto 30px;
+      padding: 12px 15px;
+      border: 1px solid #ccc;
+      border-radius: 25px;
+      text-align: center;
+      font-size: 1rem;
+      outline: none;
+      transition: 0.3s;
+    }
+    #busca:focus {
+      border-color: #007bff;
+      box-shadow: 0 0 5px rgba(0,123,255,0.3);
+    }
+
+    /* Tabela */
+    table {
+      width: 90%;
+      margin: 0 auto;
+      border-collapse: collapse;
+      background: #fff;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    }
+    th, td {
+      padding: 15px;
+      text-align: center;
+      font-size: 1rem;
+    }
+    th {
+      background: #343a40;
+      color: #fff;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    tr:nth-child(even) {
+      background: #f2f2f2;
+    }
+    tr:hover {
+      background: #e9ecef;
+    }
+
+    /* Botões de ação */
+    button {
+      padding: 8px 12px;
+      border: none;
+      border-radius: 20px;
+      cursor: pointer;
+      font-size: 0.9rem;
+      transition: 0.3s;
+    }
+    .btn-excluir {
+      background: #dc3545;
+      color: white;
+    }
+    .btn-excluir:hover {
+      background: #b02a37;
+    }
+    .btn-editar {
+      background: #ffc107;
+      color: black;
+    }
+    .btn-editar:hover {
+      background: #e0a800;
+    }
+    .btn-estoque {
+      background: #28a745;
+      color: white;
+    }
+    .btn-estoque:hover {
+      background: #1e7e34;
+    }
+
+    /* Modal */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      left: 0; top: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.6);
+      justify-content: center;
+      align-items: center;
+    }
+    .modal-content {
+      background: #fff;
+      padding: 25px;
+      border-radius: 12px;
+      width: 350px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+      animation: aparecer 0.3s ease-in-out;
+    }
+    .modal-content h3 {
+      margin-bottom: 15px;
+      text-align: center;
+      color: #333;
+    }
+    .modal-content input,
+    .modal-content textarea {
+      width: 100%;
+      padding: 10px;
+      margin: 8px 0;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 1rem;
+    }
+    .modal-content button {
+      width: 100%;
+      margin-top: 10px;
+    }
+    .close {
+      float: right;
+      font-size: 20px;
+      cursor: pointer;
+      color: #999;
+    }
+    .close:hover {
+      color: #333;
+    }
+
+    @keyframes aparecer {
+      from { transform: scale(0.9); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Lista de Produtos</h2>
+  <a href="cadastro_produto.html">+ Cadastrar Novo Produto</a>
+
+  <input type="text" id="busca" placeholder="🔍 Buscar produto pelo nome...">
+
+  <table id="tabelaProdutos">
+    <thead>
+      <tr>
+        <th>Nome</th>
+        <th>Descrição</th>
+        <th>Preço (R$)</th>
+        <th>Quantidade</th>
+        <th>Ações</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+
+  <!-- Modal de Edição -->
+  <div id="modal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="fecharModal()">&times;</span>
+      <h3>Editar Produto</h3>
+      <input type="text" id="editNomeProduto" placeholder="Nome do Produto">
+      <textarea id="editDescricao" placeholder="Descrição"></textarea>
+      <input type="number" id="editPreco" placeholder="Preço (R$)" step="0.01">
+      <input type="number" id="editQuantidade" placeholder="Quantidade">
+      <button class="btn-editar" onclick="salvarEdicao()">Salvar Alterações</button>
+    </div>
+  </div>
+
+  <!-- Modal de Estoque -->
+  <div id="estoqueModal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="fecharEstoqueModal()">&times;</span>
+      <h3>Atualizar Estoque</h3>
+      <p id="nomeProdutoEstoque"></p>
+      <input type="number" id="novaQuantidade" placeholder="Nova quantidade">
+      <button class="btn-estoque" onclick="salvarEstoque()">Atualizar</button>
+    </div>
+  </div>
+
+  <script>
+    let produtoEditandoId = null;
+    let produtoEstoqueId = null;
+
+    function carregarProdutos(filtro = "") {
+      const produtos = JSON.parse(localStorage.getItem('produtos')) || [];
+      const tbody = document.querySelector("#tabelaProdutos tbody");
+      tbody.innerHTML = "";
+
+      produtos
+        .filter(p => p.nomeProduto.toLowerCase().includes(filtro.toLowerCase()))
+        .forEach(produto => {
+          const tr = document.createElement("tr");
+          tr.innerHTML = `
+            <td>${produto.nomeProduto}</td>
+            <td>${produto.descricao}</td>
+            <td>R$ ${produto.preco}</td>
+            <td>${produto.quantidade}</td>
+            <td>
+              <button class="btn-editar" onclick="editarProduto(${produto.id})">Editar</button>
+              <button class="btn-estoque" onclick="abrirEstoque(${produto.id})">Atualizar Estoque</button>
+              <button class="btn-excluir" onclick="excluirProduto(${produto.id})">Excluir</button>
+            </td>
+          `;
+          tbody.appendChild(tr);
+        });
+    }
+
+    function excluirProduto(id) {
+      let produtos = JSON.parse(localStorage.getItem('produtos')) || [];
+      produtos = produtos.filter(p => p.id !== id);
+      localStorage.setItem('produtos', JSON.stringify(produtos));
+      carregarProdutos(document.getElementById("busca").value);
+    }
+
+    function editarProduto(id) {
+      const produtos = JSON.parse(localStorage.getItem('produtos')) || [];
+      const produto = produtos.find(p => p.id === id);
+      if (!produto) return;
+
+      produtoEditandoId = id;
+
+      document.getElementById('editNomeProduto').value = produto.nomeProduto;
+      document.getElementById('editDescricao').value = produto.descricao;
+      document.getElementById('editPreco').value = produto.preco;
+      document.getElementById('editQuantidade').value = produto.quantidade;
+
+      document.getElementById('modal').style.display = "flex";
+    }
+
+    function salvarEdicao() {
+      const produtos = JSON.parse(localStorage.getItem('produtos')) || [];
+      const index = produtos.findIndex(p => p.id === produtoEditandoId);
+      if (index === -1) return;
+
+      produtos[index].nomeProduto = document.getElementById('editNomeProduto').value;
+      produtos[index].descricao = document.getElementById('editDescricao').value;
+      produtos[index].preco = document.getElementById('editPreco').value;
+      produtos[index].quantidade = document.getElementById('editQuantidade').value;
+
+      localStorage.setItem('produtos', JSON.stringify(produtos));
+      fecharModal();
+      carregarProdutos(document.getElementById("busca").value);
+    }
+
+    function abrirEstoque(id) {
+      const produtos = JSON.parse(localStorage.getItem('produtos')) || [];
+      const produto = produtos.find(p => p.id === id);
+      if (!produto) return;
+
+      produtoEstoqueId = id;
+      document.getElementById("nomeProdutoEstoque").textContent = "Produto: " + produto.nomeProduto;
+      document.getElementById("novaQuantidade").value = produto.quantidade;
+
+      document.getElementById("estoqueModal").style.display = "flex";
+    }
+
+    function salvarEstoque() {
+      const produtos = JSON.parse(localStorage.getItem('produtos')) || [];
+      const index = produtos.findIndex(p => p.id === produtoEstoqueId);
+      if (index === -1) return;
+
+      produtos[index].quantidade = parseInt(document.getElementById("novaQuantidade").value);
+      localStorage.setItem("produtos", JSON.stringify(produtos));
+
+      fecharEstoqueModal();
+      carregarProdutos(document.getElementById("busca").value);
+    }
+
+    function fecharModal() {
+      document.getElementById('modal').style.display = "none";
+      produtoEditandoId = null;
+    }
+
+    function fecharEstoqueModal() {
+      document.getElementById("estoqueModal").style.display = "none";
+      produtoEstoqueId = null;
+    }
+
+    document.getElementById("busca").addEventListener("input", (e) => {
+      carregarProdutos(e.target.value);
+    });
+
+    carregarProdutos();
+  </script>
+
+</body>
+</html>
