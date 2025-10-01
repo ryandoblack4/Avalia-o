@@ -1,59 +1,25 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-    <meta charset="UTF-8">
+  <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/static/style_index.css">
-    <title>Mix-Modas | Loja de Roupas</title>
+  <title>Mix-Modas</title>
+<link rel="stylesheet" href="/static/css/style_index.css">
 </head>
 <body>
 
-    <header>
-        <h1>Estilo Urbano</h1>
-        <p>Sua loja de moda masculina e feminina</p>
-    </header>
+<h1>Bem-vindo</h1>
 
-    <nav>
-        <ul>
-            <li><a href="#">Início</a></li>
-            <li><a href="#">Masculino</a></li>
-            <li><a href="#">Feminino</a></li>
-            <li><a href="#">Acessórios</a></li>
-            <li><a href="#">Contato</a></li>
-        </ul>
-    </nav>
+<nav id="menuAdmin" style="display:none">
+  <a href="/templates/lista_produtos.html">Lista de Produtos</a> |
+  <a href="/templates/cadastro_produtos.html">Cadastrar Produto</a>
+</nav>
+<button id="logout">Sair</button>
 
-    <section>
-        <h2>Destaques da Semana</h2>
-
-        <article>
-            <h3>Camiseta Branca</h3>
-            <img src="https://via.placeholder.com/200" alt="Camiseta Branca">
-            <p>Preço: R$ 49,90</p>
-        </article>
-
-        <article>
-            <h3>Calça Jeans</h3>
-            <img src="https://via.placeholder.com/200" alt="Calça Jeans">
-            <p>Preço: R$ 119,90</p>
-        </article>
-
-        <article>
-            <h3>Vestido Floral</h3>
-            <img src="https://via.placeholder.com/200" alt="Vestido Floral">
-            <p>Preço: R$ 89,90</p>
-        </article>
-
-        <article>
-            <h3>Jaqueta de Couro</h3>
-            <img src="https://via.placeholder.com/200" alt="Jaqueta de Couro">
-            <p>Preço: R$ 199,90</p>
-        </article>
-    </section>
-
-    <footer>
-        <p>&copy; 2025 Estilo Urbano - Todos os direitos reservados</p>
-    </footer>
-
+<script src="/static/js/protecao.js"></script>
+<script>
+  if(localStorage.getItem('userRole')==='admin') document.getElementById('menuAdmin').style.display='block';
+  document.getElementById('logout').addEventListener('click', ()=>{ localStorage.removeItem('usuarioLogado'); localStorage.removeItem('userRole'); window.location.href='/templates/tela_login.html'; });
+</script>
 </body>
 </html>

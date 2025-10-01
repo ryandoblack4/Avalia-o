@@ -1,32 +1,22 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-    <meta charset="UTF-8">
+  <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/static/style_login.css">
-    <title>Login</title>
+  <title>Login</title>
+<link rel="stylesheet" href="/static/css/style_login.css">
 </head>
 <body>
-    <form id="loginForm">
-        <h1>Login</h1>
-        <div>
-            <label for="email">Seu e-mail</label>
-            <input type="email" id="email" required />
-        </div>
-        <div>
-            <label for="password">Sua senha</label>
-            <input type="password" id="password" required />
-        </div>
-        <button type="submit" ><a href="index.html">ENTRAR</a></button>
-        
-        <p>
-            Não tem cadastro?
-            <a href="tela_cadastro.html">Clique aqui!</a>
-        </p>
-        <p id="mensagem" style="color: red;"></p>
-    </form>
+<h2>Login</h2>
 
-    <!-- JS separado -->
-    <script src="js/login.js"></script>
+<form id="loginForm">
+  <input id="email" type="email" placeholder="Email" required><br>
+  <input id="password" type="password" placeholder="Senha" required><br>
+  <button type="submit">Entrar</button>
+</form>
+
+<p id="mensagem"></p>
+<a href="/templates/tela_cadastro.html">Cadastrar</a>
+<script src="/static/js/login.js"></script>
 </body>
 </html>
