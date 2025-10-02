@@ -22,7 +22,7 @@
         <div class="icons">
             <a href="lista_desejos.html">❤️ Lista de Desejos</a>
             <a href="tela_login.html">👤 Entrar</a>
-            <a href="carrinho.html">🛒 Seu Carrinho (0)</a>
+            <a href="carrinho.html" id="carrinhoLink">🛒 Seu Carrinho (0)</a>
         </div>
     </header>
 
@@ -324,28 +324,79 @@
     </footer>
 
     <script>
-        function pesquisar() {
-            const termo = document.getElementById('searchInput').value;
-            if (termo.trim()) {
-                alert(`Pesquisando por: ${termo}`);
-            }
-        }
+      // Array de produtos de exemplo (extraído do seu HTML) - em um site real, carregue de um JSON ou API
+const produtos = [
+    { id: 1, nome: 'Camiseta Branca', preco: 49.90, imagem: 'https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=300&h=300&fit=crop' },
+    { id: 2, nome: 'Calça Jeans', preco: 119.90, imagem: 'https://images.unsplash.com/photo-1542272604-787c3835535d?w=300&h=300&fit=crop' },
+    { id: 3, nome: 'Vestido Floral', preco: 89.90, imagem: 'https://images.unsplash.com/photo-1595777457583-95e059d581b8?w=300&h=300&fit=crop' },
+    { id: 4, nome: 'Jaqueta de Couro', preco: 199.90, imagem: 'https://images.unsplash.com/photo-1551028719-00167b16eac5?w=300&h=300&fit=crop' },
+    { id: 5, nome: 'Blusa Moletom', preco: 39.90, imagem: 'https://images.unsplash.com/photo-1556821840-3a63f95609a7?w=300&h=300&fit=crop' },
+    { id: 6, nome: 'Short Jeans', preco: 29.90, imagem: 'https://images.unsplash.com/photo-1582418702059-97ebafb35d09?w=300&h=300&fit=crop' },
+    { id: 7, nome: 'Tênis Esportivo', preco: 79.90, imagem: 'https://images.unsplash.com/photo-1586790170083-2f9ceadc732d?w=300&h=300&fit=crop' },
+    { id: 8, nome: 'Bolsa de Couro', preco: 59.90, imagem: 'https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?w=300&h=300&fit=crop' }
+];
 
-        // Contador das ofertas relâmpago
-        function atualizarContador() {
-            const contador = document.querySelector('.tempo');
-            // Lógica do contador aqui
-        }
+// Função para adicionar ao carrinho
+function adicionarAoCarrinho(produtoId) {
+    const produto = produtos.find(p => p.id === produtoId);
+    if (!produto) return;
 
-        setInterval(atualizarContador, 1000);
+    let carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
+    const itemExistente = carrinho.find(item => item.id === produtoId);
 
-        // Pesquisar ao pressionar Enter
-        document.getElementById('searchInput').addEventListener('keypress', function(e) {
-            if (e.key === 'Enter') {
-                pesquisar();
-            }
-        });
+    if (itemExistente) {
+        itemExistente.quantidade += 1;
+    } else {
+        carrinho.push({ ...produto, quantidade: 1 });
+    }
+
+    localStorage.setItem('carrinho', JSON.stringify(carrinho));
+    atualizarContadorCarrinho();
+    alert(`${produto.nome} adicionado ao carrinho!`);
+}
+
+// Função para atualizar o contador no header
+function atualizarContadorCarrinho() {
+    const carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
+    const totalItens = carrinho.reduce((total, item) => total + item.quantidade, 0);
+    document.getElementById('carrinhoLink').textContent = `🛒 Seu Carrinho (${totalItens})`;
+}
+
+// Inicializar contador ao carregar a página
+atualizarContadorCarrinho();
+
+// Adicionar event listeners aos botões (baseado na posição/texto, já que não há IDs únicos)
+document.querySelectorAll('.btn-carrinho').forEach((btn, index) => {
+    btn.addEventListener('click', () => adicionarAoCarrinho(index + 1));  // IDs de 1 a 8
+});
+
+// Funções existentes (pesquisa e contador de ofertas)
+function pesquisar() {
+    const termo = document.getElementById('searchInput').value;
+    if (termo.trim()) {
+        alert(`Pesquisando por: ${termo}`);
+    }
+}
+
+function atualizarContador() {
+    const contador = document.querySelector('.tempo');
+    // Lógica do contador aqui (exemplo simples: decrementa segundos)
+    let tempo = contador.textContent;
+    // Implemente sua lógica de timer aqui
+}
+
+setInterval(atualizarContador, 1000);
+
+document.getElementById('searchInput').addEventListener('keypress', function(e) {
+    if (e.key === 'Enter') {
+        pesquisar();
+    }
+});
     </script>
+    
 
 </body>
 </html>
+
+
+
