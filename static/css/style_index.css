@@ -1,83 +1,727 @@
-body {
-    font-family: 'Segoe UI', sans-serif;
+
+     
+/* ================== RESET ================== */
+* {
     margin: 0;
     padding: 0;
-    background-color: #f4f4f4;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background-color: #fff;
     color: #333;
 }
 
+/* ================== HEADER TOPO PRETO ================== */
 header {
-    background-color: #111;
+    background-color: #000;
     color: white;
-    text-align: center;
-    padding: 2rem 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.7rem 2rem;
 }
 
+header .logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+    letter-spacing: 2px;
+}
+
+/* Barra de pesquisa central */
+header .search-bar {
+    flex: 1;
+    margin: 0 2rem;
+    display: flex;
+    align-items: center;
+}
+
+header .search-bar input {
+    width: 100%;
+    padding: 0.6rem 1rem;
+    border-radius: 3px;
+    border: none;
+    font-size: 0.95rem;
+}
+
+/* Ícones à direita */
+header .icons {
+    display: flex;
+    gap: 1.8rem;
+    font-size: 0.9rem;
+    align-items: center;
+    cursor: pointer;
+}
+
+/* ================== NAV CATEGORIAS ================== */
 nav {
-    background-color: #222;
-    padding: 1rem;
+    background-color: #000;
+    padding: 0.7rem 2rem;
+    border-top: none;
+    border-bottom: none;
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    font-size: 0.95rem;
+}
+
+/* Se ainda estiver preto, adicione esta regra específica */
+nav ul {
+    list-style: none;
+    display: flex;
+    gap: 2rem;
+}
+
+nav ul li a {
+    color: white !important; /* Força a cor branca */
+}
+
+nav ul li a:hover {
+    color: #e6007e;
+}
+
+/* ================== PROMO BAR ================== */
+.promo-bar {
+    background-color: #000;
+    color: #fff;
     text-align: center;
+    font-size: 0.95rem;
+    padding: 0.6rem;
+}
+
+.promo-bar span {
+    font-weight: bold;
+}
+
+/* ================== BANNER PRINCIPAL ================== */
+.banner {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #f2f0ec;
+    padding: 0;
+    gap: 0;
+    min-height: 500px;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Imagem ocupando todo o banner */
+.banner-image {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.banner-image img {
+    width: 100%;
+    height: 100%;
+    min-height: 500px;
+    object-fit: cover;
+    object-position: center;
+    border-radius: 0;
+    box-shadow: none;
+}
+
+/* ================== FOOTER ================== */
+footer {
+    background: #111;
+    color: white;
+    padding: 3rem 2rem 1rem;
+}
+
+.footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+}
+
+.footer-section h3,
+.footer-section h4 {
+    margin-bottom: 1rem;
+    color: #fff;
+}
+
+.footer-section a {
+    display: block;
+    color: #ccc;
+    text-decoration: none;
+    margin-bottom: 0.5rem;
+    transition: color 0.3s ease;
+}
+
+.footer-section a:hover {
+    color: #ff6b6b;
+}
+
+.footer-bottom {
+    text-align: center;
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 1px solid #333;
+    color: #666;
+}
+
+/* ================== DESTAQUES ================== */
+.destaques {
+    padding: 2rem 8%;
+    text-align: center;
+}
+
+.destaques h2 {
+    margin-bottom: 2rem;
+    font-size: 2rem;
+    color: #333;
+}
+
+.produtos-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 2rem;
+    justify-items: center;
+}
+
+.produto {
+    background: white;
+    padding: 1rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease;
+    text-align: center;
+}
+
+.produto:hover {
+    transform: translateY(-5px);
+}
+
+.produto img {
+    max-width: 100%;
+    height: auto;
+    margin-bottom: 1rem;
+}
+
+.produto h3 {
+    margin: 0.5rem 0;
+    font-size: 1.1rem;
+}
+
+.produto p {
+    font-weight: bold;
+    color: #d6005d;
+    font-size: 1.2rem;
+}
+
+/* ================== DROPDOWN CATEGORIAS ================== */
+nav {
+    position: relative;
 }
 
 nav ul {
     list-style: none;
-    padding: 0;
-    margin: 0;
+    display: flex;
+    gap: 2rem;
 }
 
 nav ul li {
-    display: inline-block;
-    margin: 0 15px;
+    position: relative;
 }
 
 nav ul li a {
-    color: white;
     text-decoration: none;
-    font-weight: bold;
-    transition: color 0.3s ease;
+    color: #333;
+    font-weight: 500;
+    transition: color 0.2s ease;
+    padding: 0.5rem 0;
+    display: block;
 }
 
 nav ul li a:hover {
-    color: #ffd700;
+    color: #e6007e;
 }
 
-section {
-    padding: 2rem;
-    max-width: 1200px;
-    margin: auto;
+/* Dropdown Menu */
+.dropdown {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: white;
+    min-width: 200px;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+    border-radius: 5px;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: all 0.3s ease;
+    z-index: 1000;
+    border: 1px solid #eee;
 }
 
-section h2 {
+nav ul li:hover .dropdown {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.dropdown ul {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    padding: 1rem 0;
+}
+
+.dropdown ul li {
+    padding: 0;
+}
+
+.dropdown ul li a {
+    padding: 0.5rem 1.5rem;
+    color: #333;
+    font-weight: 400;
+    transition: all 0.2s ease;
+}
+
+.dropdown ul li a:hover {
+    background: #f8f8f8;
+    color: #e6007e;
+}
+
+/* Categorias Específicas */
+.dropdown-masculino { min-width: 180px; }
+.dropdown-feminino { min-width: 180px; }
+.dropdown-infantil { min-width: 180px; }
+.dropdown-todas { min-width: 220px; }
+
+/* Dropdown para Acessórios */
+.dropdown-acessorios { 
+    min-width: 180px; 
+}
+
+/* ================== DROPDOWN CATEGORIAS ================== */
+nav ul {
+    list-style: none;
+    display: flex;
+    gap: 2rem;
+}
+
+nav ul li {
+    position: relative;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: #333;
+    font-weight: 500;
+    transition: color 0.2s ease;
+    padding: 0.5rem 0;
+    display: block;
+}
+
+nav ul li a:hover {
+    color: #e6007e;
+}
+
+/* Dropdown Menu */
+.dropdown {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: white;
+    min-width: 200px;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+    border-radius: 5px;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: all 0.3s ease;
+    z-index: 1000;
+    border: 1px solid #eee;
+}
+
+nav ul li:hover .dropdown {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.dropdown ul {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    padding: 1rem 0;
+}
+
+.dropdown ul li {
+    padding: 0;
+}
+
+.dropdown ul li a {
+    padding: 0.5rem 1.5rem;
+    color: #333;
+    font-weight: 400;
+    transition: all 0.2s ease;
+}
+
+.dropdown ul li a:hover {
+    background: #f8f8f8;
+    color: #e6007e;
+}
+
+/* Categorias Específicas */
+.dropdown-masculino { min-width: 180px; }
+.dropdown-feminino { min-width: 180px; }
+.dropdown-infantil { min-width: 180px; }
+.dropdown-todas { min-width: 220px; }
+.dropdown-acessorios { min-width: 180px; }
+
+/* Animações */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.produto {
+    animation: fadeIn 0.6s ease forwards;
+}
+
+.produto:nth-child(1) { animation-delay: 0.1s; }
+.produto:nth-child(2) { animation-delay: 0.2s; }
+.produto:nth-child(3) { animation-delay: 0.3s; }
+.produto:nth-child(4) { animation-delay: 0.4s; }
+
+/* ================== LOGO ================== */
+header .logo {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.logo-img {
+    height: 40px;
+    width: auto;
+    transition: transform 0.3s ease;
+}
+
+.logo-img:hover {
+    transform: scale(1.05);
+}
+
+/* Se quiser usar texto estilizado como logo */
+.logo-text {
+    font-size: 1.8rem;
+    font-weight: 800;
+    letter-spacing: 2px;
+    color: white;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+/* Versão alternativa com ícone */
+.logo-with-icon {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: white;
+    text-decoration: none;
+}
+
+.logo-icon {
+    font-size: 2rem;
+}
+
+/* ================== CATEGORIAS EM DESTAQUE ================== */
+.categorias-destaque {
+    padding: 3rem 2rem;
     text-align: center;
+    background: #f8f9fa;
+}
+
+.categorias-destaque h2 {
+    margin-bottom: 2rem;
+    font-size: 2rem;
+    color: #333;
+}
+
+.categorias-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 1.5rem;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.categoria-card {
+    background: white;
+    padding: 1.5rem 1rem;
+    border-radius: 15px;
+    text-decoration: none;
+    color: #333;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.categoria-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+    color: #d6005d;
+}
+
+.categoria-icone {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+}
+
+/* ================== OFERTAS RELÂMPAGO ================== */
+.ofertas-relampago {
+    padding: 3rem 2rem;
+    background: linear-gradient(135deg, #ff6b6b, #ff8e8e);
+    color: white;
+}
+
+.ofertas-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     margin-bottom: 2rem;
 }
 
-article {
-    display: inline-block;
-    width: 200px;
-    margin: 1rem;
+.ofertas-header h2 {
+    font-size: 2rem;
+}
+
+.contador {
+    text-align: center;
+}
+
+.tempo {
+    font-size: 1.5rem;
+    font-weight: bold;
+    display: block;
+}
+
+.produto.oferta {
     background: white;
-    padding: 1rem;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    color: #333;
+}
+
+.produto-tag.urgente {
+    background: #ff4444;
+}
+
+/* ================== MARCAS ================== */
+.marcas {
+    padding: 3rem 2rem;
     text-align: center;
 }
 
-article img {
+.marcas h2 {
+    margin-bottom: 2rem;
+    font-size: 2rem;
+    color: #333;
+}
+
+.marcas-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 1rem;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.marca-card {
+    background: white;
+    padding: 1.5rem 1rem;
+    border-radius: 10px;
+    font-weight: 600;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease;
+}
+
+.marca-card:hover {
+    transform: scale(1.05);
+}
+
+/* ================== BLOG ================== */
+.blog {
+    padding: 3rem 2rem;
+    background: #f8f9fa;
+}
+
+.blog h2 {
+    text-align: center;
+    margin-bottom: 2rem;
+    font-size: 2rem;
+    color: #333;
+}
+
+.blog-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.blog-card {
+    background: white;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease;
+}
+
+.blog-card:hover {
+    transform: translateY(-5px);
+}
+
+.blog-card img {
     width: 100%;
-    height: auto;
-    border-radius: 5px;
+    height: 200px;
+    object-fit: cover;
 }
 
-article h3 {
-    margin-top: 0.5rem;
-    font-size: 1.1rem;
+.blog-content {
+    padding: 1.5rem;
 }
 
-footer {
-    background-color: #111;
+.blog-link {
+    color: #d6005d;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+/* ================== NEWSLETTER ================== */
+.newsletter {
+    background: linear-gradient(135deg, #667eea, #764ba2);
     color: white;
+    padding: 4rem 2rem;
     text-align: center;
+}
+
+.newsletter h2 {
+    font-size: 2.2rem;
+    margin-bottom: 1rem;
+}
+
+.newsletter-form {
+    display: flex;
+    max-width: 400px;
+    margin: 2rem auto 0;
+    border-radius: 25px;
+    overflow: hidden;
+}
+
+.newsletter-form input {
+    flex: 1;
     padding: 1rem;
-    margin-top: 2rem;
+    border: none;
+    font-size: 1rem;
+}
+
+.newsletter-form button {
+    background: #ff6b6b;
+    color: white;
+    border: none;
+    padding: 1rem 2rem;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+/* ================== FOOTER MELHORADO ================== */
+.footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    padding-bottom: 2rem;
+}
+
+.footer-section h3,
+.footer-section h4 {
+    margin-bottom: 1rem;
+    color: #fff;
+}
+
+.footer-section a {
+    display: block;
+    color: #ccc;
+    text-decoration: none;
+    margin-bottom: 0.5rem;
+    transition: color 0.3s ease;
+}
+
+.footer-section a:hover {
+    color: #ff6b6b;
+}
+
+.footer-bottom {
+    text-align: center;
+    padding-top: 2rem;
+    border-top: 1px solid #333;
+    color: #666;
+}
+
+/* ================== TAGS DE PRODUTO ================== */
+.produto-tag {
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+    background: #d6005d;
+    color: white;
+    padding: 0.3rem 0.8rem;
+    border-radius: 15px;
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+.produto {
+    position: relative;
+}
+
+.produto-preco {
+    font-size: 1.3rem;
+    font-weight: bold;
+    color: #d6005d;
+    margin: 0.5rem 0;
+}
+
+.produto-parcelamento {
+    color: #666;
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+}
+
+/* ================== IMAGENS DOS PRODUTOS ================== */
+.produto img {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.produto:hover img {
+    transform: scale(1.05);
+}
+
+/* Ajuste para ofertas relâmpago */
+.ofertas-relampago .produtos-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+}
+
+/* Blog images */
+.blog-card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
 }

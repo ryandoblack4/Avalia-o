@@ -1,25 +1,351 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-  <meta charset="UTF-8">
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Mix-Modas</title>
-<link rel="stylesheet" href="/static/css/style_index.css">
+    <link rel="stylesheet" href="/static/style_index.css">
+    <title>Mix-Modas | Loja de Roupas</title>
 </head>
 <body>
 
-<h1>Bem-vindo</h1>
+    <!-- HEADER -->
+    <header>
+        <div class="logo">
+            <a href="index.html" style="color: white; text-decoration: none; font-size: 1.5rem; font-weight: 700;">
+              <img src="/static/logo-mixmodas.png" alt="Mix-Modas" class="logo-img">
+            </a>
+        </div>
+        <div class="search-bar">
+            <input type="text" placeholder="O que você procura hoje?" id="searchInput">
+            <button onclick="pesquisar()">Pesquisar</button>
+        </div>
+        <div class="icons">
+            <a href="lista_desejos.html">❤️ Lista de Desejos</a>
+            <a href="tela_login.html">👤 Entrar</a>
+            <a href="carrinho.html">🛒 Seu Carrinho (0)</a>
+        </div>
+    </header>
 
-<nav id="menuAdmin" style="display:none">
-  <a href="/templates/lista_produtos.html">Lista de Produtos</a> |
-  <a href="/templates/cadastro_produtos.html">Cadastrar Produto</a>
-</nav>
-<button id="logout">Sair</button>
+    <!-- NAV CATEGORIAS COM DROPDOWN -->
+    <nav>
+        <ul>
+            <!-- Todas as Categorias -->
+            <li>
+                <a href="categorias.html">☰ Todas as categorias</a>
+                <div class="dropdown dropdown-todas">
+                    <ul>
+                        <li><a href="masculino.html">👕 Masculino</a></li>
+                        <li><a href="feminino.html">👚 Feminino</a></li>
+                        <li><a href="infantil.html">👶 Infantil</a></li>
+                        <li><a href="acessorios.html">🕶️ Acessórios</a></li>
+                        <li><a href="calcados.html">👟 Calçados</a></li>
+                        <li><a href="esportivo.html">🏃 Esportivo</a></li>
+                    </ul>
+                </div>
+            </li>
 
-<script src="/static/js/protecao.js"></script>
-<script>
-  if(localStorage.getItem('userRole')==='admin') document.getElementById('menuAdmin').style.display='block';
-  document.getElementById('logout').addEventListener('click', ()=>{ localStorage.removeItem('usuarioLogado'); localStorage.removeItem('userRole'); window.location.href='/templates/tela_login.html'; });
-</script>
+            <!-- Masculino -->
+            <li>
+                <a href="masculino.html">Masculino</a>
+                <div class="dropdown dropdown-masculino">
+                    <ul>
+                        <li><a href="masculino.html?categoria=camisetas">👕 Camisetas</a></li>
+                        <li><a href="masculino.html?categoria=camisas">👔 Camisas</a></li>
+                        <li><a href="masculino.html?categoria=calcas">👖 Calças</a></li>
+                        <li><a href="masculino.html?categoria=bermudas">🩳 Bermudas</a></li>
+                        <li><a href="masculino.html?categoria=blazers">🥼 Blazers</a></li>
+                        <li><a href="masculino.html?categoria=esportivo">🏃 Esportivo</a></li>
+                    </ul>
+                </div>
+            </li>
+
+            <!-- Feminino -->
+            <li>
+                <a href="feminino.html">Feminino</a>
+                <div class="dropdown dropdown-feminino">
+                    <ul>
+                        <li><a href="feminino.html?categoria=vestidos">👗 Vestidos</a></li>
+                        <li><a href="feminino.html?categoria=blusas">👚 Blusas</a></li>
+                        <li><a href="feminino.html?categoria=calcas">👖 Calças</a></li>
+                        <li><a href="feminino.html?categoria=saias">👡 Saias</a></li>
+                    </ul>
+                </div>
+            </li>
+
+            <!-- Infantil -->
+            <li>
+                <a href="infantil.html">Infantil</a>
+                <div class="dropdown dropdown-infantil">
+                    <ul>
+                        <li><a href="infantil.html?categoria=menino">🚹 Menino</a></li>
+                        <li><a href="infantil.html?categoria=menina">🚺 Menina</a></li>
+                        <li><a href="infantil.html?categoria=calcados-infantil">👟 Calçados</a></li>
+                    </ul>
+                </div>
+            </li>
+
+            <!-- Acessórios -->
+            <li>
+                <a href="acessorios.html">Acessórios</a>
+                <div class="dropdown dropdown-acessorios">
+                    <ul>
+                        <li><a href="acessorios.html?categoria=relogios">⌚ Relógios</a></li>
+                        <li><a href="acessorios.html?categoria=oculos">🕶️ Óculos</a></li>
+                        <li><a href="acessorios.html?categoria=chapeus">🧢 Chapéus</a></li>
+                        <li><a href="acessorios.html?categoria=lenços">🧣 Lenços</a></li>
+                        <li><a href="acessorios.html?categoria=cintos">⛓️ Cintos</a></li>
+                    </ul>
+                </div>
+            </li>
+
+            <li><a href="ofertas.html">🔥 Ofertas</a></li>
+        </ul>
+    </nav>
+
+    <!-- PROMO BAR -->
+    <div class="promo-bar">
+        🚀 Frete grátis para compras acima de <span>R$99,99</span> — Ganhe 
+        <span>+20% OFF</span> na primeira compra com o cupom <span>PRIMEIRA20</span>
+    </div>
+
+    <!-- BANNER PRINCIPAL -->
+    <section class="banner">
+        <div class="banner-image">
+            <img src="/static/Gemini_Generated_Image_67a9zm67a9zm67a9 (1).png" alt="Promoção Flash Sale">
+        </div>
+    </section>
+
+    <!-- CATEGORIAS EM DESTAQUE -->
+    <section class="categorias-destaque">
+        <h2>✨ Categorias em Destaque</h2>
+        <div class="categorias-grid">
+            <a href="feminino.html" class="categoria-card">
+                <div class="categoria-icone">👚</div>
+                <span>Feminino</span>
+            </a>
+            <a href="masculino.html" class="categoria-card">
+                <div class="categoria-icone">👕</div>
+                <span>Masculino</span>
+            </a>
+            <a href="infantil.html" class="categoria-card">
+                <div class="categoria-icone">👶</div>
+                <span>Infantil</span>
+            </a>
+            <a href="acessorios.html" class="categoria-card">
+                <div class="categoria-icone">🕶️</div>
+                <span>Acessórios</span>
+            </a>
+            <a href="calcados.html" class="categoria-card">
+                <div class="categoria-icone">👟</div>
+                <span>Calçados</span>
+            </a>
+        </div>
+    </section>
+
+    <!-- DESTAQUES DA SEMANA -->
+    <section class="destaques">
+        <h2>⭐ Destaques da Semana</h2>
+        <div class="produtos-grid">
+            <article class="produto">
+                <div class="produto-tag">-30%</div>
+                <img src="https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=300&h=300&fit=crop" alt="Camiseta Branca">
+                <h3>Camiseta Branca</h3>
+                <p class="produto-preco">R$ 49,90</p>
+                <p class="produto-parcelamento">ou 3x de R$ 16,63</p>
+                <button class="btn-carrinho">Adicionar ao Carrinho</button>
+            </article>
+
+            <article class="produto">
+                <div class="produto-tag">-25%</div>
+                <img src="https://images.unsplash.com/photo-1542272604-787c3835535d?w=300&h=300&fit=crop" alt="Calça Jeans">
+                <h3>Calça Jeans</h3>
+                <p class="produto-preco">R$ 119,90</p>
+                <p class="produto-parcelamento">ou 4x de R$ 29,98</p>
+                <button class="btn-carrinho">Adicionar ao Carrinho</button>
+            </article>
+
+            <article class="produto">
+                <div class="produto-tag">-40%</div>
+                <img src="https://images.unsplash.com/photo-1595777457583-95e059d581b8?w=300&h=300&fit=crop" alt="Vestido Floral">
+                <h3>Vestido Floral</h3>
+                <p class="produto-preco">R$ 89,90</p>
+                <p class="produto-parcelamento">ou 3x de R$ 29,97</p>
+                <button class="btn-carrinho">Adicionar ao Carrinho</button>
+            </article>
+
+            <article class="produto">
+                <div class="produto-tag">-15%</div>
+                <img src="https://images.unsplash.com/photo-1551028719-00167b16eac5?w=300&h=300&fit=crop" alt="Jaqueta de Couro">
+                <h3>Jaqueta de Couro</h3>
+                <p class="produto-preco">R$ 199,90</p>
+                <p class="produto-parcelamento">ou 5x de R$ 39,98</p>
+                <button class="btn-carrinho">Adicionar ao Carrinho</button>
+            </article>
+        </div>
+    </section>
+
+    <!-- OFERTAS RELÂMPAGO -->
+    <section class="ofertas-relampago">
+        <div class="ofertas-header">
+            <h2>⚡ Ofertas Relâmpago</h2>
+            <div class="contador">
+                <span class="tempo">02:15:33</span>
+                <span>Termina em</span>
+            </div>
+        </div>
+        <div class="produtos-grid">
+            <article class="produto oferta">
+                <div class="produto-tag urgente">-50%</div>
+                <img src="https://images.unsplash.com/photo-1556821840-3a63f95609a7?w=300&h=300&fit=crop" alt="Blusa Moletom">
+                <h3>Blusa Moletom</h3>
+                <p class="produto-preco">R$ 39,90</p>
+                <p class="produto-parcelamento">ou 2x de R$ 19,95</p>
+                <button class="btn-carrinho">Comprar Agora</button>
+            </article>
+
+            <article class="produto oferta">
+                <div class="produto-tag urgente">-60%</div>
+                <img src="https://images.unsplash.com/photo-1582418702059-97ebafb35d09?w=300&h=300&fit=crop" alt="Short Jeans">
+                <h3>Short Jeans</h3>
+                <p class="produto-preco">R$ 29,90</p>
+                <p class="produto-parcelamento">ou 2x de R$ 14,95</p>
+                <button class="btn-carrinho">Comprar Agora</button>
+            </article>
+
+            <article class="produto oferta">
+                <div class="produto-tag urgente">-45%</div>
+                <img src="https://images.unsplash.com/photo-1586790170083-2f9ceadc732d?w=300&h=300&fit=crop" alt="Tênis Esportivo">
+                <h3>Tênis Esportivo</h3>
+                <p class="produto-preco">R$ 79,90</p>
+                <p class="produto-parcelamento">ou 3x de R$ 26,63</p>
+                <button class="btn-carrinho">Comprar Agora</button>
+            </article>
+
+            <article class="produto oferta">
+                <div class="produto-tag urgente">-55%</div>
+                <img src="https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?w=300&h=300&fit=crop" alt="Bolsa Couro">
+                <h3>Bolsa de Couro</h3>
+                <p class="produto-preco">R$ 59,90</p>
+                <p class="produto-parcelamento">ou 2x de R$ 29,95</p>
+                <button class="btn-carrinho">Comprar Agora</button>
+            </article>
+        </div>
+    </section>
+
+    <!-- MARCAS POPULARES -->
+    <section class="marcas">
+        <h2>🏆 Marcas em Destaque</h2>
+        <div class="marcas-grid">
+            <div class="marca-card">Nike</div>
+            <div class="marca-card">Adidas</div>
+            <div class="marca-card">Zara</div>
+            <div class="marca-card">H&M</div>
+            <div class="marca-card">Renner</div>
+            <div class="marca-card">Shein</div>
+        </div>
+    </section>
+
+    <!-- BLOG/MODA -->
+    <section class="blog">
+        <h2>📰 Dicas de Moda</h2>
+        <div class="blog-grid">
+            <article class="blog-card">
+                <img src="https://images.unsplash.com/photo-1445205170230-053b83016050?w=400&h=250&fit=crop" alt="Tendências Verão">
+                <div class="blog-content">
+                    <h3>5 Tendências para o Verão 2024</h3>
+                    <p>Descubra as peças que vão dominar a estação</p>
+                    <a href="#" class="blog-link">Ler mais →</a>
+                </div>
+            </article>
+
+            <article class="blog-card">
+                <img src="/static/BlogCirculoCromatico_img10.jpg" alt="Como Combinar">
+                <div class="blog-content">
+                    <h3>Como Combinar Cores</h3>
+                    <p>Aprenda a criar looks incríveis</p>
+                    <a href="#" class="blog-link">Ler mais →</a>
+                </div>
+            </article>
+
+            <article class="blog-card">
+                <img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=400&h=250&fit=crop" alt="Moda Sustentável">
+                <div class="blog-content">
+                    <h3>Moda Sustentável</h3>
+                    <p>Como ser fashion e consciente</p>
+                    <a href="#" class="blog-link">Ler mais →</a>
+                </div>
+            </article>
+        </div>
+    </section>
+
+    <!-- NEWSLETTER -->
+    <section class="newsletter">
+        <div class="newsletter-content">
+            <h2>📧 Receba Ofertas Exclusivas!</h2>
+            <p>Cadastre-se e ganhe 15% OFF na primeira compra</p>
+            <div class="newsletter-form">
+                <input type="email" placeholder="Seu melhor e-mail">
+                <button>Cadastrar</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>👗 Mix-Modas</h3>
+                <p>Sua loja de moda preferida com os melhores preços e tendências.</p>
+            </div>
+            <div class="footer-section">
+                <h4>Institucional</h4>
+                <a href="#">Sobre nós</a>
+                <a href="#">Trocas e Devoluções</a>
+                <a href="#">Política de Privacidade</a>
+            </div>
+            <div class="footer-section">
+                <h4>Atendimento</h4>
+                <a href="#">Central de Ajuda</a>
+                <a href="#">Fale Conosco</a>
+                <a href="#">WhatsApp</a>
+            </div>
+            <div class="footer-section">
+                <h4>Redes Sociais</h4>
+                <div class="social-links">
+                    <a href="#">📷 Instagram</a>
+                    <a href="#">📘 Facebook</a>
+                    <a href="#">🐦 Twitter</a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 Mix-Modas - Todos os direitos reservados</p>
+        </div>
+    </footer>
+
+    <script>
+        function pesquisar() {
+            const termo = document.getElementById('searchInput').value;
+            if (termo.trim()) {
+                alert(`Pesquisando por: ${termo}`);
+            }
+        }
+
+        // Contador das ofertas relâmpago
+        function atualizarContador() {
+            const contador = document.querySelector('.tempo');
+            // Lógica do contador aqui
+        }
+
+        setInterval(atualizarContador, 1000);
+
+        // Pesquisar ao pressionar Enter
+        document.getElementById('searchInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                pesquisar();
+            }
+        });
+    </script>
+
 </body>
 </html>

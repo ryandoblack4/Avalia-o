@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/style_desejos.css">
+    <title>Lista de Desejos - Mix-Modas</title>
+</head>
+<body>
+    <!-- HEADER -->
+    <header>
+        <div class="logo">Mix-Modas</div>
+        <div class="search-bar">
+            <input type="text" placeholder="O que você procura hoje?" id="searchInput">
+            <button onclick="pesquisar()">Pesquisar</button>
+        </div>
+        <div class="icons">
+            <a href="lista_desejos.html">❤️ Lista de Desejos <span class="contador-desejos">3</span></a>
+            <a href="tela_login.html">👤 Entrar</a>
+            <a href="carrinho.html">🛒 Seu Carrinho (0)</a>
+        </div>
+    </header>
+
+    <!-- NAV CATEGORIAS -->
+    <nav>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="masculino.html">Masculino</a></li>
+            <li><a href="feminino.html">Feminino</a></li>
+            <li><a href="infantil.html">Infantil</a></li>
+            <li><a href="acessorios.html">Acessórios</a></li>
+        </ul>
+    </nav>
+
+    <div class="desejos-container">
+        <h1 class="desejos-titulo">Minha Lista de Desejos</h1>
+        
+        <!-- LISTA COM PRODUTOS -->
+        <div class="desejos-grid">
+            <!-- Produto 1 -->
+            <div class="desejo-item">
+                <img src="https://via.placeholder.com/300x300" alt="Vestido Floral" class="desejo-imagem">
+                <div class="desejo-info">
+                    <h3 class="desejo-titulo">Vestido Floral Verão</h3>
+                    <p class="desejo-preco">R$ 89,90</p>
+                    <p class="desejo-parcelamento">ou 3x de R$ 29,97</p>
+                    <div class="desejo-acoes">
+                        <button class="btn-adicionar-carrinho">Adicionar ao Carrinho</button>
+                        <button class="btn-remover-desejo">Remover dos Desejos</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Produto 2 -->
+            <div class="desejo-item">
+                <img src="https://via.placeholder.com/300x300" alt="Bolsa Couro" class="desejo-imagem">
+                <div class="desejo-info">
+                    <h3 class="desejo-titulo">Bolsa de Couro Preta</h3>
+                    <p class="desejo-preco">R$ 129,90</p>
+                    <p class="desejo-parcelamento">ou 4x de R$ 32,48</p>
+                    <div class="desejo-acoes">
+                        <button class="btn-adicionar-carrinho">Adicionar ao Carrinho</button>
+                        <button class="btn-remover-desejo">Remover dos Desejos</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Produto 3 -->
+            <div class="desejo-item">
+                <div class="desejo-indisponível">INDISPONÍVEL</div>
+                <img src="https://via.placeholder.com/300x300" alt="Tênis Esportivo" class="desejo-imagem">
+                <div class="desejo-info">
+                    <h3 class="desejo-titulo">Tênis Esportivo Branco</h3>
+                    <p class="desejo-preco">R$ 199,90</p>
+                    <p class="desejo-parcelamento">ou 5x de R$ 39,98</p>
+                    <div class="desejo-acoes">
+                        <button class="btn-adicionar-carrinho" disabled>Indisponível</button>
+                        <button class="btn-remover-desejo">Remover dos Desejos</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- LISTA VAZIA (comente esta seção quando houver produtos) -->
+        <!--
+        <div class="lista-vazia">
+            <h2>❤️ Sua lista de desejos está vazia</h2>
+            <p>Adicione produtos que você ama para comprar depois!</p>
+            <a href="index.html" class="btn-descobrir">Descobrir Produtos</a>
+        </div>
+        -->
+    </div>
+
+    <!-- FOOTER -->
+    <footer>
+        <p>&copy; 2025 Mix-Modas - Todos os direitos reservados</p>
+    </footer>
+
+    <script>
+        function pesquisar() {
+            const termo = document.getElementById('searchInput').value;
+            if (termo.trim()) {
+                alert(`Pesquisando por: ${termo}`);
+                // window.location.href = `busca.html?q=${encodeURIComponent(termo)}`;
+            }
+        }
+
+        // Funcionalidade da lista de desejos
+        document.querySelectorAll('.btn-remover-desejo').forEach(button => {
+            button.addEventListener('click', function() {
+                const item = this.closest('.desejo-item');
+                item.style.opacity = '0';
+                setTimeout(() => {
+                    item.remove();
+                    atualizarContador();
+                    verificarListaVazia();
+                }, 300);
+            });
+        });
+
+        document.querySelectorAll('.btn-adicionar-carrinho').forEach(button => {
+            button.addEventListener('click', function() {
+                if (!this.disabled) {
+                    alert('Produto adicionado ao carrinho!');
+                }
+            });
+        });
+
+        function atualizarContador() {
+            const contador = document.querySelector('.contador-desejos');
+            const itens = document.querySelectorAll('.desejo-item').length;
+            contador.textContent = itens;
+        }
+
+        function verificarListaVazia() {
+            const itens = document.querySelectorAll('.desejo-item').length;
+            if (itens === 0) {
+                // Mostrar mensagem de lista vazia
+                const grid = document.querySelector('.desejos-grid');
+                grid.innerHTML = `
+                    <div class="lista-vazia" style="grid-column: 1 / -1;">
+                        <h2>❤️ Sua lista de desejos está vazia</h2>
+                        <p>Adicione produtos que você ama para comprar depois!</p>
+                        <a href="index.html" class="btn-descobrir">Descobrir Produtos</a>
+                    </div>
+                `;
+            }
+        }
+
+        // Pesquisar ao pressionar Enter
+        document.getElementById('searchInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                pesquisar();
+            }
+        });
+    </script>
+</body>
+</html>

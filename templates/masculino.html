@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/style_categorias.css">
+    <title>Moda Masculina - Mix-Modas</title>
+</head>
+<body>
+    <!-- HEADER -->
+    <header>
+        <div class="logo">Mix-Modas</div>
+        <div class="search-bar">
+            <input type="text" placeholder="O que você procura hoje?">
+        </div>
+        <div class="icons">
+            <span>❤️ Lista de Desejos</span>
+            <a href="tela_login.html" style="color: white; text-decoration: none;">👤 Entrar</a>
+            <span>🛒 Seu Carrinho (0)</span>
+        </div>
+    </header>
+
+    <!-- NAV CATEGORIAS -->
+    <nav>
+        <div class="menu">☰ Todas as categorias</div>
+        <ul>
+            <li><a href="masculino.html">Masculino</a></li>
+            <li><a href="feminino.html">Feminino</a></li>
+            <li><a href="infantil.html">Infantil</a></li>
+            <li><a href="acessorios.html">Acessórios</a></li>
+            <li><a href="outlet.html">Outlet</a></li>
+        </ul>
+    </nav>
+
+    <!-- PROMO BAR -->
+    <div class="promo-bar">
+        Frete grátis para compras acima de <span>R$99,99</span> — Ganhe 
+        <span>+20% OFF</span> na primeira compra com o cupom <span>PRIMEIRA20</span>
+    </div>
+
+    <!-- BREADCRUMB -->
+    <div class="breadcrumb">
+        <a href="index.html">Home</a> > <span>Moda Masculina</span>
+    </div>
+
+    <!-- TÍTULO -->
+    <section class="page-title">
+        <h1>Moda Masculina</h1>
+        <p>Estilo e conforto para o homem moderno</p>
+    </section>
+
+    <!-- FILTROS -->
+    <section class="filters">
+        <div class="filter-group">
+            <label>Ordenar por:</label>
+            <select>
+                <option>Mais vendidos</option>
+                <option>Menor preço</option>
+                <option>Maior preço</option>
+                <option>Lançamentos</option>
+            </select>
+        </div>
+        <div class="filter-group">
+            <label>Tamanho:</label>
+            <select>
+                <option>Todos</option>
+                <option>P</option>
+                <option>M</option>
+                <option>G</option>
+                <option>GG</option>
+            </select>
+        </div>
+        <div class="filter-group">
+            <label>Cor:</label>
+            <select>
+                <option>Todas</option>
+                <option>Preto</option>
+                <option>Branco</option>
+                <option>Azul</option>
+                <option>Cinza</option>
+            </select>
+        </div>
+    </section>
+
+    <!-- PRODUTOS -->
+    <section class="produtos-container">
+        <div class="produtos-grid">
+            <!-- Produto 1 -->
+            <div class="produto-card">
+                <img src="https://via.placeholder.com/300x300" alt="Camiseta Básica" class="produto-imagem">
+                <div class="produto-info">
+                    <h3 class="produto-titulo">Camiseta Básica Masculina</h3>
+                    <p class="produto-preco">R$ 49,90</p>
+                    <p class="produto-parcelamento">ou 3x de R$ 16,63</p>
+                    <div class="produto-acoes">
+                        <button class="btn-carrinho">Adicionar</button>
+                        <button class="btn-favorito">❤️</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Produto 2 -->
+            <div class="produto-card">
+                <img src="https://via.placeholder.com/300x300" alt="Calça Jeans" class="produto-imagem">
+                <div class="produto-info">
+                    <h3 class="produto-titulo">Calça Jeans Skinny</h3>
+                    <p class="produto-preco">R$ 129,90</p>
+                    <p class="produto-parcelamento">ou 4x de R$ 32,48</p>
+                    <div class="produto-acoes">
+                        <button class="btn-carrinho">Adicionar</button>
+                        <button class="btn-favorito">❤️</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Adicione mais produtos... -->
+        </div>
+
+        <!-- PAGINAÇÃO -->
+        <div class="paginacao">
+            <a href="#">‹</a>
+            <a href="#" class="ativa">1</a>
+            <a href="#">2</a>
+            <a href="#">3</a>
+            <a href="#">›</a>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <p>&copy; 2025 Mix-Modas - Todos os direitos reservados</p>
+    </footer>
+</body>
+</html>
