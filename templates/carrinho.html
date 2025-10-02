@@ -102,18 +102,18 @@
     </footer>
 
     <script>
-        // Função para carregar itens do localStorage e renderizar
+        
 function carregarCarrinho() {
     const carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
     const container = document.getElementById('carrinhoItens');
 
     if (carrinho.length === 0) {
         container.innerHTML = '<p style="text-align: center; color: #666;">Seu carrinho está vazio. <a href="index.html">Continue comprando!</a></p>';
-        atualizarTotal(0, 0, 0);  // Zera totais
+        atualizarTotal(0, 0, 0);  
         return;
     }
 
-    container.innerHTML = '';  // Limpa container
+    container.innerHTML = '';  
     carrinho.forEach((item, index) => {
         const itemDiv = document.createElement('div');
         itemDiv.className = 'carrinho-item';
@@ -133,14 +133,12 @@ function carregarCarrinho() {
         container.appendChild(itemDiv);
     });
 
-    // Adiciona event listeners após renderizar
     adicionarEventListeners();
-    atualizarTotal();  // Calcula inicial
+    atualizarTotal();  
 }
 
-// Função para adicionar event listeners (agora com data-index para identificar itens)
 function adicionarEventListeners() {
-    // Aumentar quantidade
+
     document.querySelectorAll('.aumentar').forEach(button => {
         button.addEventListener('click', function() {
             const index = parseInt(this.dataset.index);
@@ -148,7 +146,6 @@ function adicionarEventListeners() {
         });
     });
 
-    // Diminuir quantidade
     document.querySelectorAll('.diminuir').forEach(button => {
         button.addEventListener('click', function() {
             const index = parseInt(this.dataset.index);
@@ -156,7 +153,6 @@ function adicionarEventListeners() {
         });
     });
 
-    // Remover item
     document.querySelectorAll('.remover-item').forEach(button => {
         button.addEventListener('click', function() {
             const index = parseInt(this.dataset.index);
@@ -165,28 +161,25 @@ function adicionarEventListeners() {
     });
 }
 
-// Função para atualizar quantidade de um item
 function atualizarQuantidade(index, delta) {
     let carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
     if (carrinho[index]) {
         carrinho[index].quantidade += delta;
         if (carrinho[index].quantidade <= 0) {
-            carrinho[index].quantidade = 1;  // Não permite 0
+            carrinho[index].quantidade = 1;  
         }
         localStorage.setItem('carrinho', JSON.stringify(carrinho));
-        carregarCarrinho();  // Re-renderiza para atualizar spans
+        carregarCarrinho();  
     }
 }
 
-// Função para remover item
 function removerItem(index) {
     let carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
     carrinho.splice(index, 1);
     localStorage.setItem('carrinho', JSON.stringify(carrinho));
-    carregarCarrinho();  // Re-renderiza
+    carregarCarrinho();  
 }
 
-// Função para calcular e atualizar totais
 function atualizarTotal() {
     const carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
     let subtotal = 0;
@@ -195,11 +188,10 @@ function atualizarTotal() {
         subtotal += item.preco * item.quantidade;
     });
 
-    const frete = subtotal > 99.99 ? 0 : 10.00;  // Grátis acima de R$99,99
-    const desconto = subtotal > 100 ? 20.00 : 0;  // Fixo de R$20 para > R$100
+    const frete = subtotal > 99.99 ? 0 : 10.00;  
+    const desconto = subtotal > 100 ? 20.00 : 0;  
     const total = subtotal + frete - desconto;
 
-    // Atualiza os spans no HTML
     document.getElementById('subtotal').textContent = `R$ ${subtotal.toFixed(2).replace('.', ',')}`;
     document.getElementById('frete').textContent = frete === 0 ? 'Grátis' : `R$ ${frete.toFixed(2).replace('.', ',')}`;
     document.getElementById('desconto').textContent = `-R$ ${desconto.toFixed(2).replace('.', ',')}`;
