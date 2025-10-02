@@ -324,7 +324,6 @@
     </footer>
 
     <script>
-      // Array de produtos de exemplo (extraído do seu HTML) - em um site real, carregue de um JSON ou API
 const produtos = [
     { id: 1, nome: 'Camiseta Branca', preco: 49.90, imagem: 'https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=300&h=300&fit=crop' },
     { id: 2, nome: 'Calça Jeans', preco: 119.90, imagem: 'https://images.unsplash.com/photo-1542272604-787c3835535d?w=300&h=300&fit=crop' },
@@ -336,10 +335,12 @@ const produtos = [
     { id: 8, nome: 'Bolsa de Couro', preco: 59.90, imagem: 'https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?w=300&h=300&fit=crop' }
 ];
 
-// Função para adicionar ao carrinho
 function adicionarAoCarrinho(produtoId) {
     const produto = produtos.find(p => p.id === produtoId);
-    if (!produto) return;
+    if (!produto) {
+        console.error('Produto não encontrado:', produtoId);
+        return;
+    }
 
     let carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
     const itemExistente = carrinho.find(item => item.id === produtoId);
@@ -351,26 +352,26 @@ function adicionarAoCarrinho(produtoId) {
     }
 
     localStorage.setItem('carrinho', JSON.stringify(carrinho));
+    console.log('Carrinho atualizado:', carrinho);  
     atualizarContadorCarrinho();
     alert(`${produto.nome} adicionado ao carrinho!`);
 }
 
-// Função para atualizar o contador no header
 function atualizarContadorCarrinho() {
     const carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
     const totalItens = carrinho.reduce((total, item) => total + item.quantidade, 0);
     document.getElementById('carrinhoLink').textContent = `🛒 Seu Carrinho (${totalItens})`;
 }
 
-// Inicializar contador ao carregar a página
 atualizarContadorCarrinho();
 
-// Adicionar event listeners aos botões (baseado na posição/texto, já que não há IDs únicos)
 document.querySelectorAll('.btn-carrinho').forEach((btn, index) => {
-    btn.addEventListener('click', () => adicionarAoCarrinho(index + 1));  // IDs de 1 a 8
+    btn.addEventListener('click', () => {
+        console.log('Botão clicado:', index + 1);  
+        adicionarAoCarrinho(index + 1);  
+    });
 });
 
-// Funções existentes (pesquisa e contador de ofertas)
 function pesquisar() {
     const termo = document.getElementById('searchInput').value;
     if (termo.trim()) {
@@ -380,9 +381,6 @@ function pesquisar() {
 
 function atualizarContador() {
     const contador = document.querySelector('.tempo');
-    // Lógica do contador aqui (exemplo simples: decrementa segundos)
-    let tempo = contador.textContent;
-    // Implemente sua lógica de timer aqui
 }
 
 setInterval(atualizarContador, 1000);
