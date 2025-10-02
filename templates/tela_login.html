@@ -1,47 +1,38 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-    <meta charset="UTF-8">
+  <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/static/style_login.css">
-    <title>Login - Mix-Modas</title>
+  <title>Login</title>
+<link rel="stylesheet" href="/static/css/style_login.css">
 </head>
 <body>
-    <form id="loginForm">
-        <!-- Logo profissional -->
-        <div class="logo-container">
+
+<form id="loginForm">
+  <div class="logo-container">
             <div class="logo">Mix-Modas</div>
             <div class="logo-subtitle">Sua loja de moda favorita</div>
         </div>
 
         <h1>Fazer Login</h1>
-        
-        <div>
-            <label for="email">Seu e-mail</label>
-            <input type="email" id="email" required placeholder="seu@email.com">
-        </div>
-        
-        <div>
-            <label for="password">Sua senha</label>
-            <input type="password" id="password" required placeholder="Sua senha">
-        </div>
-        
-        <!-- Botão de login correto -->
-        <button type="submit" class="login-button">ENTRAR</button>
+  <input id="email" type="email" placeholder="Email" required><br>
+  <input id="password" type="password" placeholder="Senha" required><br>
+   <button type="submit" class="login-button">ENTRAR</button>
         
         <!-- Botão para cadastro -->
-        <button type="button" class="btn-secondary" onclick="window.location.href='tela_cadastro.html'">
+        <button type="button" class="btn-secondary" onclick="window.location.href='/templates/tela_cadastro.html'">
             Não tem conta? Cadastre-se
         </button>
         
-        <p id="mensagem" style="color: red;"></p>
-        
-        <div class="links-container">
-            <a href="index.html" class="voltar-link">← Voltar para a loja</a>
+  <div class="links-container">
+            <a href="/templates/index.html" class="voltar-link">← Voltar para a loja</a>
         </div>
-    </form>
 
-    <!-- JS separado -->
-    <script src="js/login.js"></script>
+        <p id="mensagem" style="color: red;"></p>
+       
+</form>
+
+<p id="mensagem"></p>
+<script src="/static/js/login.js"></script>
 </body>
 </html>

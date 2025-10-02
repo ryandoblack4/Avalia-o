@@ -12,6 +12,6 @@
     "sqlite3": "^5.1.6"
   },
   "devDependencies": {
-    "jest": "^29.7.0"
+    "jest": "^30.2.0"
   }
 }

@@ -1,39 +1,34 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-    <meta charset="UTF-8">
+  <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/static/style_cadastro.css">
-    <title>Cadastro - Mix-Modas</title>
+  <title>Cadastro</title>
+<link rel="stylesheet" href="/static/css/style_cadastro.css">
 </head>
 <body>
-    <form id="cadastroForm">
-        <!-- Logo profissional -->
-        <div class="logo-container">
+
+<form id="cadastroForm">
+    
+  <div class="logo-container">
             <div class="logo">Mix-Modas</div>
             <div class="logo-subtitle">Sua loja de moda favorita</div>
         </div>
 
         <h1>Criar Conta</h1>
-        
-        <div>
-            <label for="nome">Nome Completo</label>
-            <input type="text" id="nome" required placeholder="Seu nome completo">
-        </div>
-        <div>
-            <label for="email">E-mail</label>
-            <input type="email" id="email" required placeholder="seu@email.com">
-        </div>
-        <div>
-            <label for="telefone">Telefone</label>
-            <input type="text" id="telefone" required placeholder="(11) 99999-9999">
-        </div>
-        <div>
-            <label for="password">Senha</label>
-            <input type="password" id="password" required placeholder="Crie uma senha segura">
-        </div>      
-        
-        <button type="submit">Criar Conta</button>
+ <div>
+    <label>Nome Completo</label>
+   <input id="nome" type="text" placeholder="Nome" required><br>
+ </div>
+  <div>
+    <label>E-mail</label>
+    <input id="email" type="email" placeholder="Email" required><br>
+  </div>
+  <div>
+    <label>Senha</label>
+    <input id="password" type="password" placeholder="Senha" required><br>  
+  </div>
+    <button type="submit">Criar Conta</button>
         
         <!-- Botão para quem já tem conta -->
         <button type="button" class="btn-secondary" onclick="window.location.href='tela_login.html'">
@@ -43,11 +38,11 @@
         <p id="mensagem" style="color: green;"></p>
         
         <div class="links-container">
-            <a href="index.html" class="voltar-link">← Voltar para a loja</a>
+            <a href="/templates/index.html" class="voltar-link">← Voltar para a loja</a>
         </div>
-    </form>
+</form>
+<p id="mensagem"></p>
 
-    <!-- JS separado -->
-    <script src="js/cadastro.js"></script>
+<script src="/static/js/cadastro.js"></script>
 </body>
 </html>

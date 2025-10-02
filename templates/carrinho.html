@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/static/style_carrinho.css">
+    <link rel="stylesheet" href="/static/css/style_carrinho.css">
     <title>Carrinho - Mix-Modas</title>
 </head>
 <body>
@@ -15,17 +15,17 @@
             <button onclick="pesquisar()">🔍</button>
         </div>
         <div class="icons">
-            <a href="lista_desejos.html">❤️ Lista de Desejos</a>
-            <a href="tela_login.html">👤 Entrar</a>
-            <a href="carrinho.html">🛒 Seu Carrinho (2)</a>
+            <a href="/templates/lista_desejos.html">❤️ Lista de Desejos</a>
+            <a href="/templates/tela_login.html">👤 Entrar</a>
+            <a href="/templates/carrinho.html">🛒 Seu Carrinho (2)</a>
         </div>
     </header>
 
     <!-- NAV CATEGORIAS -->
     <nav>
         <ul>
-            <li><a href="index.html">Home</a></li>
-            <li><a href="masculino.html">Masculino</a></li>
+            <li><a href="/templates/index.html">Home</a></li>
+            <li><a href="/templates/masculino.html">Masculino</a></li>
             <li><a href="feminino.html">Feminino</a></li>
             <li><a href="infantil.html">Infantil</a></li>
             <li><a href="acessorios.html">Acessórios</a></li>
@@ -35,9 +35,8 @@
     <div class="carrinho-container">
         <div class="carrinho-conteudo">
             <h1 class="carrinho-titulo">Seu Carrinho</h1>
-
-            <div class="carrinho-itens" id="carrinhoItens">
-            /div>
+            
+            <div class="carrinho-itens">
                 <!-- Item 1 -->
                 <div class="carrinho-item">
                     <img src="https://via.placeholder.com/100x100" alt="Camiseta Branca" class="carrinho-item-imagem">
@@ -71,39 +70,73 @@
         </div>
 
         <div class="resumo-pedido">
-    <h2 class="resumo-titulo">Resumo do Pedido</h2>
-    
-    <div class="resumo-linha">
-        <span>Subtotal:</span>
-        <span id="subtotal">R$ 0,00</span>
+            <h2 class="resumo-titulo">Resumo do Pedido</h2>
+            
+            <div class="resumo-linha">
+                <span>Subtotal:</span>
+                <span>R$ 169,80</span>
+            </div>
+            
+            <div class="resumo-linha">
+                <span>Frete:</span>
+                <span>Grátis</span>
+            </div>
+            
+            <div class="resumo-linha">
+                <span>Desconto:</span>
+                <span>-R$ 20,00</span>
+            </div>
+            
+            <div class="resumo-total">
+                <span>Total:</span>
+                <span>R$ 149,80</span>
+            </div>
+            
+            <button class="btn-finalizar">Finalizar Compra</button>
+            <a href="/templates/index.html" class="continuar-comprando">Continuar comprando</a>
+        </div>
     </div>
-    
-    <div class="resumo-linha">
-        <span>Frete:</span>
-        <span id="frete">R$ 0,00</span>
-    </div>
-    
-    <div class="resumo-linha">
-        <span>Desconto:</span>
-        <span id="desconto">-R$ 0,00</span>
-    </div>
-    
-    <div class="resumo-total">
-        <span>Total:</span>
-        <span id="total">R$ 0,00</span>
-    </div>
-    
-    <button class="btn-finalizar">Finalizar Compra</button>
-    <a href="index.html" class="continuar-comprando">Continuar comprando</a>
-</div>
+
     <!-- FOOTER -->
     <footer>
         <p>&copy; 2025 Mix-Modas - Todos os direitos reservados</p>
     </footer>
 
     <script>
-        
-function carregarCarrinho() {
+        function pesquisar() {
+            const termo = document.getElementById('searchInput').value;
+            if (termo.trim()) {
+                alert(`Pesquisando por: ${termo}`);
+            }
+        }
+
+        // Funcionalidade do carrinho
+        document.querySelectorAll('.aumentar').forEach(button => {
+            button.addEventListener('click', function() {
+                const span = this.parentElement.querySelector('span');
+                span.textContent = parseInt(span.textContent) + 1;
+                atualizarTotal();
+            });
+        });
+
+        document.querySelectorAll('.diminuir').forEach(button => {
+            button.addEventListener('click', function() {
+                const span = this.parentElement.querySelector('span');
+                if (parseInt(span.textContent) > 1) {
+                    span.textContent = parseInt(span.textContent) - 1;
+                    atualizarTotal();
+                }
+            });
+        });
+
+        document.querySelectorAll('.remover-item').forEach(button => {
+            button.addEventListener('click', function() {
+                this.closest('.carrinho-item').remove();
+                atualizarTotal();
+            });
+        });
+
+       function carregarCarrinho() {
     const carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
     const container = document.getElementById('carrinhoItens');
 
@@ -200,20 +233,14 @@ function atualizarTotal() {
     console.log('Total atualizado:', { subtotal, frete, desconto, total });
 }
 
-function pesquisar() {
-    const termo = document.getElementById('searchInput').value;
-    if (termo.trim()) {
-        alert(`Pesquisando por: ${termo}`);
-    }
-}
+        // Pesquisar ao pressionar Enter
+        document.getElementById('searchInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                pesquisar();
+            }
+        });
 
-document.getElementById('searchInput').addEventListener('keypress', function(e) {
-    if (e.key === 'Enter') {
-        pesquisar();
-    }
-});
-
-carregarCarrinho();
+        
     </script>
 </body>
 </html>

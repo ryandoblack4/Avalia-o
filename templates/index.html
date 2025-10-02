@@ -1,18 +1,17 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-    <meta charset="UTF-8">
+  <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/static/style_index.css">
-    <title>Mix-Modas | Loja de Roupas</title>
+  <title>Mix-Modas</title>
+<link rel="stylesheet" href="/static/css/style_index.css">
 </head>
 <body>
 
-    <!-- HEADER -->
-    <header>
+ <header>
         <div class="logo">
             <a href="index.html" style="color: white; text-decoration: none; font-size: 1.5rem; font-weight: 700;">
-              <img src="/static/logo-mixmodas.png" alt="Mix-Modas" class="logo-img">
+              <img src="/static/css/logo-mixmodas.png" alt="Mix-Modas" class="logo-img">
             </a>
         </div>
         <div class="search-bar">
@@ -21,13 +20,16 @@
         </div>
         <div class="icons">
             <a href="lista_desejos.html">❤️ Lista de Desejos</a>
-            <a href="tela_login.html">👤 Entrar</a>
-            <a href="carrinho.html" id="carrinhoLink">🛒 Seu Carrinho (0)</a>
+            <a href="/templates/tela_login.html">👤 Entrar</a>
+            <a href="carrinho.html">🛒 Seu Carrinho (0)</a>
+            <nav id="menuAdmin" style="display:none">
+  <a href="/templates/lista_produtos.html">Lista de Produtos</a> |
+  <a href="/templates/cadastro_produtos.html">Cadastrar Produto</a>
+</nav>
         </div>
     </header>
 
-    <!-- NAV CATEGORIAS COM DROPDOWN -->
-    <nav>
+<nav>
         <ul>
             <!-- Todas as Categorias -->
             <li>
@@ -44,8 +46,7 @@
                 </div>
             </li>
 
-            <!-- Masculino -->
-            <li>
+              <li>
                 <a href="masculino.html">Masculino</a>
                 <div class="dropdown dropdown-masculino">
                     <ul>
@@ -102,16 +103,14 @@
         </ul>
     </nav>
 
-    <!-- PROMO BAR -->
-    <div class="promo-bar">
-        🚀 Frete grátis para compras acima de <span>R$99,99</span> — Ganhe 
-        <span>+20% OFF</span> na primeira compra com o cupom <span>PRIMEIRA20</span>
+ <div class="promo-bar">
+        🚀 Frete grátis para compras acima de <span>R$99,99</span> 
     </div>
 
-    <!-- BANNER PRINCIPAL -->
+ <!-- BANNER PRINCIPAL -->
     <section class="banner">
         <div class="banner-image">
-            <img src="/static/Gemini_Generated_Image_67a9zm67a9zm67a9 (1).png" alt="Promoção Flash Sale">
+            <img src="/static/css/Gemini_Generated_Image_67a9zm67a9zm67a9 (1).png" alt="Promoção Flash Sale">
         </div>
     </section>
 
@@ -239,9 +238,9 @@
             <div class="marca-card">Nike</div>
             <div class="marca-card">Adidas</div>
             <div class="marca-card">Zara</div>
-            <div class="marca-card">H&M</div>
-            <div class="marca-card">Renner</div>
-            <div class="marca-card">Shein</div>
+            <div class="marca-card">Levi's</div>
+            <div class="marca-card">Lacoste</div>
+            <div class="marca-card">Puma</div>
         </div>
     </section>
 
@@ -259,7 +258,7 @@
             </article>
 
             <article class="blog-card">
-                <img src="/static/BlogCirculoCromatico_img10.jpg" alt="Como Combinar">
+                <img src="/static/css/BlogCirculoCromatico_img10.jpg" alt="Como Combinar">
                 <div class="blog-content">
                     <h3>Como Combinar Cores</h3>
                     <p>Aprenda a criar looks incríveis</p>
@@ -314,7 +313,6 @@
                 <div class="social-links">
                     <a href="#">📷 Instagram</a>
                     <a href="#">📘 Facebook</a>
-                    <a href="#">🐦 Twitter</a>
                 </div>
             </div>
         </div>
@@ -323,7 +321,19 @@
         </div>
     </footer>
 
-    <script>
+<nav id="menuAdmin" style="display:none">
+  <a href="/templates/lista_produtos.html">Lista de Produtos</a> |
+  <a href="/templates/cadastro_produtos.html">Cadastrar Produto</a>
+</nav>
+<button id="logout">Sair</button>
+
+<script src="/static/js/protecao.js"></script>
+<script>
+  if(localStorage.getItem('userRole')==='admin') document.getElementById('menuAdmin').style.display='block';
+  document.getElementById('logout').addEventListener('click', ()=>{ localStorage.removeItem('usuarioLogado'); localStorage.removeItem('userRole'); window.location.href='/templates/tela_login.html'; });
+</script>
+
+  <script>
 const produtos = [
     { id: 1, nome: 'Camiseta Branca', preco: 49.90, imagem: 'https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=300&h=300&fit=crop' },
     { id: 2, nome: 'Calça Jeans', preco: 119.90, imagem: 'https://images.unsplash.com/photo-1542272604-787c3835535d?w=300&h=300&fit=crop' },
@@ -391,10 +401,6 @@ document.getElementById('searchInput').addEventListener('keypress', function(e) 
     }
 });
     </script>
-    
 
 </body>
 </html>
-
-
-
