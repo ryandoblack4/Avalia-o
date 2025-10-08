@@ -294,3 +294,59 @@ footer {
         justify-content: center;
     }
 }
+
+/* ================== BARRA DE PESQUISA MODERNA ================== */
+header .search-bar {
+    flex: 1;
+    margin: 0 2rem;
+    display: flex;
+    align-items: center;
+    position: relative;
+    max-width: 700px;
+}
+
+header .search-bar input {
+    width: 100%;
+    padding: 0.8rem 1rem 0.8rem 3rem;
+    border-radius: 25px;
+    border: 2px solid #e0e0e0;
+    font-size: 0.95rem;
+    background: white;
+    transition: all 0.3s ease;
+}
+
+header .search-bar input:focus {
+    outline: none;
+    border-color: #d6005d;
+    box-shadow: 0 0 0 2px rgba(214, 0, 93, 0.1);
+}
+
+header .search-bar::before {
+    content: "🔍";
+    position: absolute;
+    left: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #666;
+    z-index: 2;
+}
+
+header .search-bar button {
+    position: absolute;
+    right: 0.5rem;
+    top: 50%;
+    transform: translateY(-50%);
+    background: #d6005d;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 0.85rem;
+    font-weight: 600;
+    transition: background 0.3s ease;
+}
+
+header .search-bar button:hover {
+    background: #b80052;
+}

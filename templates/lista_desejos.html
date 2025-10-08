@@ -3,97 +3,151 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/static/css/style_desejos.css">
+    <link rel="stylesheet" href="/static/css/style_categorias.css">
     <title>Lista de Desejos - Mix-Modas</title>
 </head>
 <body>
+
     <!-- HEADER -->
     <header>
-        <div class="logo">Mix-Modas</div>
+        <div class="logo">
+            <a href="index.html" style="color: white; text-decoration: none; font-size: 1.5rem; font-weight: 700;">
+                <img src="/static/css/logo-mixmodas.png" alt="Mix-Modas" class="logo-img">
+            </a>
+        </div>
         <div class="search-bar">
             <input type="text" placeholder="O que você procura hoje?" id="searchInput">
             <button onclick="pesquisar()">Pesquisar</button>
         </div>
         <div class="icons">
-            <a href="/templates/lista_desejos.html">❤️ Lista de Desejos <span class="contador-desejos">3</span></a>
+            <a href="lista_desejos.html">❤️ Lista de Desejos (3)</a>
             <a href="/templates/tela_login.html">👤 Entrar</a>
-            <a href="/templates/carrinho.html">🛒 Seu Carrinho (0)</a>
+            <a href="carrinho.html">🛒 Seu Carrinho (0)</a>
         </div>
     </header>
 
     <!-- NAV CATEGORIAS -->
     <nav>
         <ul>
-            <li><a href="/templates/index.html">Home</a></li>
-            <li><a href="/templates/masculino.html">Masculino</a></li>
+            <!-- Todas as Categorias - NÃO CLICÁVEL -->
+            <li>
+                <a href="javascript:void(0)" style="cursor: default;">☰ Todas as categorias</a>
+                <div class="dropdown dropdown-todas">
+                    <ul>
+                        <li><a href="masculino.html">👕 Masculino</a></li>
+                        <li><a href="feminino.html">👚 Feminino</a></li>
+                        <li><a href="infantil.html">👶 Infantil</a></li>
+                        <li><a href="acessorios.html">🕶️ Acessórios</a></li>
+                        <li><a href="calcados.html">👟 Calçados</a></li>
+                        <li><a href="esportivo.html">🏃 Esportivo</a></li>
+                    </ul>
+                </div>
+            </li>
+
+            <li><a href="masculino.html">Masculino</a></li>
             <li><a href="feminino.html">Feminino</a></li>
             <li><a href="infantil.html">Infantil</a></li>
             <li><a href="acessorios.html">Acessórios</a></li>
+            <li><a href="ofertas.html">🔥 Ofertas</a></li>
         </ul>
     </nav>
 
-    <div class="desejos-container">
-        <h1 class="desejos-titulo">Minha Lista de Desejos</h1>
-        
-        <!-- LISTA COM PRODUTOS -->
-        <div class="desejos-grid">
+    <!-- PROMO BAR -->
+    <div class="promo-bar">
+        🚀 Frete grátis para compras acima de <span>R$99,99</span> 
+    </div>
+
+    <!-- BREADCRUMB -->
+    <div class="breadcrumb">
+        <a href="index.html">Home</a> > <span>Lista de Desejos</span>
+    </div>
+
+    <!-- TÍTULO -->
+    <section class="page-title">
+        <h1>❤️ Minha Lista de Desejos</h1>
+        <p>Guarde seus produtos favoritos para comprar depois</p>
+    </section>
+
+    <!-- LISTA DE DESEJOS -->
+    <section class="produtos-container">
+        <div class="produtos-grid">
             <!-- Produto 1 -->
-            <div class="desejo-item">
-                <img src="https://via.placeholder.com/300x300" alt="Vestido Floral" class="desejo-imagem">
-                <div class="desejo-info">
-                    <h3 class="desejo-titulo">Vestido Floral Verão</h3>
-                    <p class="desejo-preco">R$ 89,90</p>
-                    <p class="desejo-parcelamento">ou 3x de R$ 29,97</p>
-                    <div class="desejo-acoes">
-                        <button class="btn-adicionar-carrinho">Adicionar ao Carrinho</button>
-                        <button class="btn-remover-desejo">Remover dos Desejos</button>
+            <div class="produto-card">
+                <div class="produto-tag">-30%</div>
+                <img src="https://images.unsplash.com/photo-1595777457583-95e059d581b8?w=300&h=300&fit=crop" alt="Vestido Floral" class="produto-imagem">
+                <div class="produto-info">
+                    <h3 class="produto-titulo">Vestido Floral Verão</h3>
+                    <p class="produto-preco">R$ 89,90</p>
+                    <p class="produto-parcelamento">ou 3x de R$ 29,97</p>
+                    <div class="produto-acoes">
+                        <button class="btn-carrinho">Adicionar ao Carrinho</button>
+                        <button class="btn-favorito">🗑️ Remover</button>
                     </div>
                 </div>
             </div>
 
             <!-- Produto 2 -->
-            <div class="desejo-item">
-                <img src="https://via.placeholder.com/300x300" alt="Bolsa Couro" class="desejo-imagem">
-                <div class="desejo-info">
-                    <h3 class="desejo-titulo">Bolsa de Couro Preta</h3>
-                    <p class="desejo-preco">R$ 129,90</p>
-                    <p class="desejo-parcelamento">ou 4x de R$ 32,48</p>
-                    <div class="desejo-acoes">
-                        <button class="btn-adicionar-carrinho">Adicionar ao Carrinho</button>
-                        <button class="btn-remover-desejo">Remover dos Desejos</button>
+            <div class="produto-card">
+                <div class="produto-tag">-25%</div>
+                <img src="https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?w=300&h=300&fit=crop" alt="Bolsa Couro" class="produto-imagem">
+                <div class="produto-info">
+                    <h3 class="produto-titulo">Bolsa de Couro Preta</h3>
+                    <p class="produto-preco">R$ 129,90</p>
+                    <p class="produto-parcelamento">ou 4x de R$ 32,48</p>
+                    <div class="produto-acoes">
+                        <button class="btn-carrinho">Adicionar ao Carrinho</button>
+                        <button class="btn-favorito">🗑️ Remover</button>
                     </div>
                 </div>
             </div>
 
             <!-- Produto 3 -->
-            <div class="desejo-item">
-                <div class="desejo-indisponível">INDISPONÍVEL</div>
-                <img src="https://via.placeholder.com/300x300" alt="Tênis Esportivo" class="desejo-imagem">
-                <div class="desejo-info">
-                    <h3 class="desejo-titulo">Tênis Esportivo Branco</h3>
-                    <p class="desejo-preco">R$ 199,90</p>
-                    <p class="desejo-parcelamento">ou 5x de R$ 39,98</p>
-                    <div class="desejo-acoes">
-                        <button class="btn-adicionar-carrinho" disabled>Indisponível</button>
-                        <button class="btn-remover-desejo">Remover dos Desejos</button>
+            <div class="produto-card">
+                <div class="produto-tag">-40%</div>
+                <img src="https://images.unsplash.com/photo-1586790170083-2f9ceadc732d?w=300&h=300&fit=crop" alt="Tênis Esportivo" class="produto-imagem">
+                <div class="produto-info">
+                    <h3 class="produto-titulo">Tênis Esportivo Branco</h3>
+                    <p class="produto-preco">R$ 199,90</p>
+                    <p class="produto-parcelamento">ou 5x de R$ 39,98</p>
+                    <div class="produto-acoes">
+                        <button class="btn-carrinho">Adicionar ao Carrinho</button>
+                        <button class="btn-favorito">🗑️ Remover</button>
                     </div>
                 </div>
             </div>
         </div>
-
-        <!-- LISTA VAZIA (comente esta seção quando houver produtos) -->
-        <!--
-        <div class="lista-vazia">
-            <h2>❤️ Sua lista de desejos está vazia</h2>
-            <p>Adicione produtos que você ama para comprar depois!</p>
-            <a href="index.html" class="btn-descobrir">Descobrir Produtos</a>
-        </div>
-        -->
-    </div>
+    </section>
 
     <!-- FOOTER -->
     <footer>
-        <p>&copy; 2025 Mix-Modas - Todos os direitos reservados</p>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>👗 Mix-Modas</h3>
+                <p>Sua loja de moda preferida com os melhores preços e tendências.</p>
+            </div>
+            <div class="footer-section">
+                <h4>Institucional</h4>
+                <a href="#">Sobre nós</a>
+                <a href="#">Trocas e Devoluções</a>
+                <a href="#">Política de Privacidade</a>
+            </div>
+            <div class="footer-section">
+                <h4>Atendimento</h4>
+                <a href="#">Central de Ajuda</a>
+                <a href="#">Fale Conosco</a>
+                <a href="#">WhatsApp</a>
+            </div>
+            <div class="footer-section">
+                <h4>Redes Sociais</h4>
+                <div class="social-links">
+                    <a href="#">📷 Instagram</a>
+                    <a href="#">📘 Facebook</a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 Mix-Modas - Todos os direitos reservados</p>
+        </div>
     </footer>
 
     <script>
@@ -101,51 +155,27 @@
             const termo = document.getElementById('searchInput').value;
             if (termo.trim()) {
                 alert(`Pesquisando por: ${termo}`);
-                // window.location.href = `busca.html?q=${encodeURIComponent(termo)}`;
             }
         }
 
-        // Funcionalidade da lista de desejos
-        document.querySelectorAll('.btn-remover-desejo').forEach(button => {
+        // Funcionalidade dos botões
+        document.querySelectorAll('.btn-carrinho').forEach(button => {
             button.addEventListener('click', function() {
-                const item = this.closest('.desejo-item');
-                item.style.opacity = '0';
-                setTimeout(() => {
-                    item.remove();
-                    atualizarContador();
-                    verificarListaVazia();
-                }, 300);
+                const produto = this.closest('.produto-card');
+                const nome = produto.querySelector('.produto-titulo').textContent;
+                alert(`${nome} adicionado ao carrinho!`);
             });
         });
 
-        document.querySelectorAll('.btn-adicionar-carrinho').forEach(button => {
+        document.querySelectorAll('.btn-favorito').forEach(button => {
             button.addEventListener('click', function() {
-                if (!this.disabled) {
-                    alert('Produto adicionado ao carrinho!');
+                const produto = this.closest('.produto-card');
+                const nome = produto.querySelector('.produto-titulo').textContent;
+                if(confirm(`Remover ${nome} dos favoritos?`)) {
+                    produto.remove();
                 }
             });
         });
-
-        function atualizarContador() {
-            const contador = document.querySelector('.contador-desejos');
-            const itens = document.querySelectorAll('.desejo-item').length;
-            contador.textContent = itens;
-        }
-
-        function verificarListaVazia() {
-            const itens = document.querySelectorAll('.desejo-item').length;
-            if (itens === 0) {
-                // Mostrar mensagem de lista vazia
-                const grid = document.querySelector('.desejos-grid');
-                grid.innerHTML = `
-                    <div class="lista-vazia" style="grid-column: 1 / -1;">
-                        <h2>❤️ Sua lista de desejos está vazia</h2>
-                        <p>Adicione produtos que você ama para comprar depois!</p>
-                        <a href="index.html" class="btn-descobrir">Descobrir Produtos</a>
-                    </div>
-                `;
-            }
-        }
 
         // Pesquisar ao pressionar Enter
         document.getElementById('searchInput').addEventListener('keypress', function(e) {
@@ -154,5 +184,6 @@
             }
         });
     </script>
+
 </body>
 </html>

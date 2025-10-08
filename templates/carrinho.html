@@ -7,9 +7,13 @@
     <title>Carrinho - Mix-Modas</title>
 </head>
 <body>
-    <!-- HEADER -->
+        <!-- HEADER -->
     <header>
-        <div class="logo">Mix-Modas</div>
+        <div class="logo">
+            <a href="/templates/index.html" style="color: white; text-decoration: none;">
+                <img src="/static/css/logo-mixmodas.png" alt="Mix-Modas" class="logo-img" style="height: 35px;">
+            </a>
+        </div>
         <div class="search-bar">
             <input type="text" placeholder="O que você procura hoje?" id="searchInput">
             <button onclick="pesquisar()">🔍</button>
@@ -36,7 +40,7 @@
         <div class="carrinho-conteudo">
             <h1 class="carrinho-titulo">Seu Carrinho</h1>
             
-            <div class="carrinho-itens">
+            <div class="carrinho-itens" id="carrinhoItens">
                 <!-- Item 1 -->
                 <div class="carrinho-item">
                     <img src="https://via.placeholder.com/100x100" alt="Camiseta Branca" class="carrinho-item-imagem">
@@ -74,22 +78,22 @@
             
             <div class="resumo-linha">
                 <span>Subtotal:</span>
-                <span>R$ 169,80</span>
+                <span id="subtotal">R$ 169,80</span>
             </div>
             
             <div class="resumo-linha">
                 <span>Frete:</span>
-                <span>Grátis</span>
+                <span id="frete">Grátis</span>
             </div>
             
             <div class="resumo-linha">
                 <span>Desconto:</span>
-                <span>-R$ 20,00</span>
+                <span id="desconto">-R$ 20,00</span>
             </div>
             
             <div class="resumo-total">
                 <span>Total:</span>
-                <span>R$ 149,80</span>
+                <span id="total">R$ 149,80</span>
             </div>
             
             <button class="btn-finalizar">Finalizar Compra</button>
@@ -136,102 +140,101 @@
             });
         });
 
-       function carregarCarrinho() {
-    const carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
-    const container = document.getElementById('carrinhoItens');
+        function carregarCarrinho() {
+            const carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
+            const container = document.getElementById('carrinhoItens');
 
-    if (carrinho.length === 0) {
-        container.innerHTML = '<p style="text-align: center; color: #666;">Seu carrinho está vazio. <a href="index.html">Continue comprando!</a></p>';
-        atualizarTotal(0, 0, 0);  
-        return;
-    }
+            if (carrinho.length === 0) {
+                container.innerHTML = '<p style="text-align: center; color: #666;">Seu carrinho está vazio. <a href="index.html">Continue comprando!</a></p>';
+                atualizarTotal(0, 0, 0);  
+                return;
+            }
 
-    container.innerHTML = '';  
-    carrinho.forEach((item, index) => {
-        const itemDiv = document.createElement('div');
-        itemDiv.className = 'carrinho-item';
-        itemDiv.innerHTML = `
-            <img src="${item.imagem}" alt="${item.nome}" class="carrinho-item-imagem">
-            <div class="carrinho-item-info">
-                <h3 class="carrinho-item-titulo">${item.nome}</h3>
-                <p class="carrinho-item-preco">R$ ${item.preco.toFixed(2).replace('.', ',')}</p>
-                <div class="carrinho-quantidade">
-                    <button class="diminuir" data-index="${index}">-</button>
-                    <span>${item.quantidade}</span>
-                    <button class="aumentar" data-index="${index}">+</button>
-                </div>
-                <button class="remover-item" data-index="${index}">Remover</button>
-            </div>
-        `;
-        container.appendChild(itemDiv);
-    });
+            container.innerHTML = '';  
+            carrinho.forEach((item, index) => {
+                const itemDiv = document.createElement('div');
+                itemDiv.className = 'carrinho-item';
+                itemDiv.innerHTML = `
+                    <img src="${item.imagem}" alt="${item.nome}" class="carrinho-item-imagem">
+                    <div class="carrinho-item-info">
+                        <h3 class="carrinho-item-titulo">${item.nome}</h3>
+                        <p class="carrinho-item-preco">R$ ${item.preco.toFixed(2).replace('.', ',')}</p>
+                        <div class="carrinho-quantidade">
+                            <button class="diminuir" data-index="${index}">-</button>
+                            <span>${item.quantidade}</span>
+                            <button class="aumentar" data-index="${index}">+</button>
+                        </div>
+                        <button class="remover-item" data-index="${index}">Remover</button>
+                    </div>
+                `;
+                container.appendChild(itemDiv);
+            });
 
-    adicionarEventListeners();
-    atualizarTotal();  
-}
-
-function adicionarEventListeners() {
-
-    document.querySelectorAll('.aumentar').forEach(button => {
-        button.addEventListener('click', function() {
-            const index = parseInt(this.dataset.index);
-            atualizarQuantidade(index, 1);
-        });
-    });
-
-    document.querySelectorAll('.diminuir').forEach(button => {
-        button.addEventListener('click', function() {
-            const index = parseInt(this.dataset.index);
-            atualizarQuantidade(index, -1);
-        });
-    });
-
-    document.querySelectorAll('.remover-item').forEach(button => {
-        button.addEventListener('click', function() {
-            const index = parseInt(this.dataset.index);
-            removerItem(index);
-        });
-    });
-}
-
-function atualizarQuantidade(index, delta) {
-    let carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
-    if (carrinho[index]) {
-        carrinho[index].quantidade += delta;
-        if (carrinho[index].quantidade <= 0) {
-            carrinho[index].quantidade = 1;  
+            adicionarEventListeners();
+            atualizarTotal();  
         }
-        localStorage.setItem('carrinho', JSON.stringify(carrinho));
-        carregarCarrinho();  
-    }
-}
 
-function removerItem(index) {
-    let carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
-    carrinho.splice(index, 1);
-    localStorage.setItem('carrinho', JSON.stringify(carrinho));
-    carregarCarrinho();  
-}
+        function adicionarEventListeners() {
+            document.querySelectorAll('.aumentar').forEach(button => {
+                button.addEventListener('click', function() {
+                    const index = parseInt(this.dataset.index);
+                    atualizarQuantidade(index, 1);
+                });
+            });
 
-function atualizarTotal() {
-    const carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
-    let subtotal = 0;
+            document.querySelectorAll('.diminuir').forEach(button => {
+                button.addEventListener('click', function() {
+                    const index = parseInt(this.dataset.index);
+                    atualizarQuantidade(index, -1);
+                });
+            });
 
-    carrinho.forEach(item => {
-        subtotal += item.preco * item.quantidade;
-    });
+            document.querySelectorAll('.remover-item').forEach(button => {
+                button.addEventListener('click', function() {
+                    const index = parseInt(this.dataset.index);
+                    removerItem(index);
+                });
+            });
+        }
 
-    const frete = subtotal > 99.99 ? 0 : 10.00;  
-    const desconto = subtotal > 100 ? 20.00 : 0;  
-    const total = subtotal + frete - desconto;
+        function atualizarQuantidade(index, delta) {
+            let carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
+            if (carrinho[index]) {
+                carrinho[index].quantidade += delta;
+                if (carrinho[index].quantidade <= 0) {
+                    carrinho[index].quantidade = 1;  
+                }
+                localStorage.setItem('carrinho', JSON.stringify(carrinho));
+                carregarCarrinho();  
+            }
+        }
 
-    document.getElementById('subtotal').textContent = `R$ ${subtotal.toFixed(2).replace('.', ',')}`;
-    document.getElementById('frete').textContent = frete === 0 ? 'Grátis' : `R$ ${frete.toFixed(2).replace('.', ',')}`;
-    document.getElementById('desconto').textContent = `-R$ ${desconto.toFixed(2).replace('.', ',')}`;
-    document.getElementById('total').textContent = `R$ ${total.toFixed(2).replace('.', ',')}`;
+        function removerItem(index) {
+            let carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
+            carrinho.splice(index, 1);
+            localStorage.setItem('carrinho', JSON.stringify(carrinho));
+            carregarCarrinho();  
+        }
 
-    console.log('Total atualizado:', { subtotal, frete, desconto, total });
-}
+        function atualizarTotal() {
+            const carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
+            let subtotal = 0;
+
+            carrinho.forEach(item => {
+                subtotal += item.preco * item.quantidade;
+            });
+
+            const frete = subtotal > 99.99 ? 0 : 10.00;  
+            const desconto = subtotal > 100 ? 20.00 : 0;  
+            const total = subtotal + frete - desconto;
+
+            document.getElementById('subtotal').textContent = `R$ ${subtotal.toFixed(2).replace('.', ',')}`;
+            document.getElementById('frete').textContent = frete === 0 ? 'Grátis' : `R$ ${frete.toFixed(2).replace('.', ',')}`;
+            document.getElementById('desconto').textContent = `-R$ ${desconto.toFixed(2).replace('.', ',')}`;
+            document.getElementById('total').textContent = `R$ ${total.toFixed(2).replace('.', ',')}`;
+
+            console.log('Total atualizado:', { subtotal, frete, desconto, total });
+        }
 
         // Pesquisar ao pressionar Enter
         document.getElementById('searchInput').addEventListener('keypress', function(e) {
@@ -240,6 +243,10 @@ function atualizarTotal() {
             }
         });
 
+        // Carregar carrinho quando a página carregar
+        document.addEventListener('DOMContentLoaded', function() {
+            carregarCarrinho();
+        });
         
     </script>
 </body>
