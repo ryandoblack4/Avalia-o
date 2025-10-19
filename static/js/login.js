@@ -11,7 +11,11 @@ document.addEventListener('DOMContentLoaded', ()=>{
       if(res.ok && data.success){
         localStorage.setItem('usuarioLogado', data.email);
         localStorage.setItem('userRole', data.role);
-        window.location.href = '/templates/index.html';
+        if (data.role === 'admin') {
+          window.location.href = '/templates/lista_produtos.html';
+        } else {
+          window.location.href = '/templates/index.html';
+        }
       } else {
         msg.textContent = data.error || 'Erro no login';
       }

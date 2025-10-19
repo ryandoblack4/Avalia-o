@@ -2,26 +2,86 @@
 <html lang="pt-br">
 <head>
   <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Cadastro Produto</title>
-<link rel="stylesheet" href="/static/css/style_cadastro_produtos.css">
+  <link rel="stylesheet" href="/static/css/style_cadastro_produtos.css">
+  <link rel="stylesheet" href="/static/css/admin.css">
 </head>
 <body>
 
+<div class="form-container">
+  <h1>Cadastrar / Editar Produto</h1>
+  <form id="produtoForm" enctype="multipart/form-data" class="produto-form">
+    <input type="hidden" id="editingId">
 
+    <div class="form-row">
+      <label for="nome">Nome</label>
+      <input type="text" id="nome" required placeholder="Nome do produto">
+    </div>
 
-<form id="produtoForm">
+    <div class="form-row">
+      <label for="categoria">Categoria</label>
+      <select id="categoria">
+        <option value="">-- Selecione categoria --</option>
+        <option value="masculino">Masculino</option>
+        <option value="feminino">Feminino</option>
+        <option value="infantil">Infantil</option>
+      </select>
+    </div>
 
-<h2>Cadastro de Produto</h2>
+    <div class="form-row">
+      <label for="descricao">Descrição</label>
+      <textarea id="descricao" required placeholder="Descrição breve"></textarea>
+    </div>
 
-  <input id="nome" type="text" placeholder="Nome do Produto" required><br>
-  <textarea id="descricao" placeholder="Descrição do Produto"></textarea><br>
-  <input id="preco" type="number" step="0.01" placeholder="Preço (R$)" required><br>
-  <input id="quantidade" type="number" placeholder="Quantidade" required><br>
-  <input type="hidden" id="editingId" value=""><br>
-  <button type="submit">Cadastrar Produto</button>
-</form>
-<script src="/static/js/protecao_admin.js"></script>
+    <div class="form-row group">
+      <div>
+        <label for="preco">Preço (R$)</label>
+        <input type="number" id="preco" step="0.01" required>
+      </div>
+      <div>
+        <label for="quantidade">Quantidade</label>
+        <input type="number" id="quantidade" required>
+      </div>
+    </div>
+
+    <div class="form-row">
+      <label for="imagem">Imagem do Produto</label>
+      <input type="file" id="imagem" name="imagem" accept="image/*">
+    </div>
+
+    <div class="form-actions">
+      <button type="submit" class="btn primary">Salvar</button>
+      <a href="/templates/lista_produtos.html" class="btn secondary">Cancelar</a>
+    </div>
+  </form>
+</div>
+
+<aside id="menuLateralAdmin">
+  <h3>⚙️ Modo Admin</h3>
+  <a href="/templates/lista_produtos.html">🧾 Lista de Produtos</a>
+  <a href="/templates/cadastro_produtos.html">➕ Cadastrar Produto</a>
+  <button id="logoutAdmin">🚪 Sair</button>
+</aside>
+
+<script>
+    const usuarioLogado = localStorage.getItem('usuarioLogado');
+    const role = localStorage.getItem('userRole');
+    if (!usuarioLogado || role !== 'admin') {
+      alert('Acesso negado! Você precisa estar logado como admin.');
+      window.location.href = '/templates/index.html';
+    } else {
+      document.getElementById('menuLateralAdmin').style.display = 'flex';
+      document.body.classList.add('menu-ativo');
+  }
+
+  document.getElementById('logoutAdmin').addEventListener('click', () => {
+    localStorage.removeItem('usuarioLogado');
+    localStorage.removeItem('userRole');
+    localStorage.removeItem('nomeUsuario');
+    window.location.href = '/templates/tela_login.html';
+  });
+
+</script>
+
 <script src="/static/js/cadastro_produtos.js"></script>
-</body>
-</html>

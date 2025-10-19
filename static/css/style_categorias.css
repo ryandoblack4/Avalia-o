@@ -98,37 +98,28 @@ header .icons a {
 
 /* ================== NAV CATEGORIAS ================== */
 nav {
-    background-color: #000;
+    background-color: #111;
     padding: 0.7rem 2rem;
-    border-top: none;
-    border-bottom: none;
-    display: flex;
-    align-items: center;
-    gap: 2rem;
-    font-size: 0.95rem;
 }
 
 nav ul {
     list-style: none;
     display: flex;
+    justify-content: center;
     gap: 2rem;
-}
-
-nav ul li {
-    position: relative;
+    flex-wrap: wrap;
 }
 
 nav ul li a {
     text-decoration: none;
     color: white;
     font-weight: 500;
-    transition: color 0.2s ease;
+    transition: color 0.3s ease;
     padding: 0.5rem 0;
-    display: block;
 }
 
 nav ul li a:hover {
-    color: #e6007e;
+    color: #ff2e8a;
 }
 
 /* Dropdown Menu */

@@ -7,7 +7,6 @@
     <title>Carrinho - Mix-Modas</title>
 </head>
 <body>
-        <!-- HEADER -->
     <header>
         <div class="logo">
             <a href="/templates/index.html" style="color: white; text-decoration: none;">
@@ -21,87 +20,61 @@
         <div class="icons">
             <a href="/templates/lista_desejos.html">❤️ Lista de Desejos</a>
             <a href="/templates/tela_login.html">👤 Entrar</a>
-            <a href="/templates/carrinho.html">🛒 Seu Carrinho (2)</a>
+            <a href="/templates/carrinho.html">🛒 Seu Carrinho</a>
         </div>
     </header>
 
-    <!-- NAV CATEGORIAS -->
     <nav>
         <ul>
             <li><a href="/templates/index.html">Home</a></li>
             <li><a href="/templates/masculino.html">Masculino</a></li>
-            <li><a href="feminino.html">Feminino</a></li>
-            <li><a href="infantil.html">Infantil</a></li>
-            <li><a href="acessorios.html">Acessórios</a></li>
+            <li><a href="/templates/feminino.html">Feminino</a></li>
+            <li><a href="/templates/infantil.html">Infantil</a></li>
+            <li><a href="/templates/acessorios.html">Acessórios</a></li>
         </ul>
     </nav>
 
     <div class="carrinho-container">
         <div class="carrinho-conteudo">
             <h1 class="carrinho-titulo">Seu Carrinho</h1>
-            
             <div class="carrinho-itens" id="carrinhoItens">
-                <!-- Item 1 -->
-                <div class="carrinho-item">
-                    <img src="https://via.placeholder.com/100x100" alt="Camiseta Branca" class="carrinho-item-imagem">
-                    <div class="carrinho-item-info">
-                        <h3 class="carrinho-item-titulo">Camiseta Branca Básica</h3>
-                        <p class="carrinho-item-preco">R$ 49,90</p>
-                        <div class="carrinho-quantidade">
-                            <button class="diminuir">-</button>
-                            <span>1</span>
-                            <button class="aumentar">+</button>
-                        </div>
-                        <button class="remover-item">Remover</button>
-                    </div>
-                </div>
-
-                <!-- Item 2 -->
-                <div class="carrinho-item">
-                    <img src="https://via.placeholder.com/100x100" alt="Calça Jeans" class="carrinho-item-imagem">
-                    <div class="carrinho-item-info">
-                        <h3 class="carrinho-item-titulo">Calça Jeans Skinny</h3>
-                        <p class="carrinho-item-preco">R$ 119,90</p>
-                        <div class="carrinho-quantidade">
-                            <button class="diminuir">-</button>
-                            <span>1</span>
-                            <button class="aumentar">+</button>
-                        </div>
-                        <button class="remover-item">Remover</button>
-                    </div>
-                </div>
             </div>
         </div>
 
         <div class="resumo-pedido">
             <h2 class="resumo-titulo">Resumo do Pedido</h2>
-            
+
             <div class="resumo-linha">
                 <span>Subtotal:</span>
-                <span id="subtotal">R$ 169,80</span>
+                <span id="subtotal">R$ 0,00</span>
             </div>
-            
+
             <div class="resumo-linha">
                 <span>Frete:</span>
-                <span id="frete">Grátis</span>
+                <span id="frete">...</span>
             </div>
-            
+
             <div class="resumo-linha">
                 <span>Desconto:</span>
-                <span id="desconto">-R$ 20,00</span>
+                <span id="desconto">R$ 0,00</span>
             </div>
-            
+
+            <div class="resumo-linha">
+                <label for="cep">Calcular frete pelo CEP:</label>
+                <input type="text" id="cep" placeholder="Digite seu CEP" maxlength="8">
+                <button onclick="calcularFrete()">Calcular Frete</button>
+            </div>
+
             <div class="resumo-total">
                 <span>Total:</span>
-                <span id="total">R$ 149,80</span>
+                <span id="total">R$ 0,00</span>
             </div>
-            
-            <button class="btn-finalizar">Finalizar Compra</button>
+
+            <button id="btnFinalizar" class="btn-finalizar">Finalizar Compra</button>
             <a href="/templates/index.html" class="continuar-comprando">Continuar comprando</a>
         </div>
     </div>
 
-    <!-- FOOTER -->
     <footer>
         <p>&copy; 2025 Mix-Modas - Todos os direitos reservados</p>
     </footer>
@@ -109,48 +82,20 @@
     <script>
         function pesquisar() {
             const termo = document.getElementById('searchInput').value;
-            if (termo.trim()) {
-                alert(`Pesquisando por: ${termo}`);
-            }
+            if (termo.trim()) alert(`Pesquisando por: ${termo}`);
         }
-
-        // Funcionalidade do carrinho
-        document.querySelectorAll('.aumentar').forEach(button => {
-            button.addEventListener('click', function() {
-                const span = this.parentElement.querySelector('span');
-                span.textContent = parseInt(span.textContent) + 1;
-                atualizarTotal();
-            });
-        });
-
-        document.querySelectorAll('.diminuir').forEach(button => {
-            button.addEventListener('click', function() {
-                const span = this.parentElement.querySelector('span');
-                if (parseInt(span.textContent) > 1) {
-                    span.textContent = parseInt(span.textContent) - 1;
-                    atualizarTotal();
-                }
-            });
-        });
-
-        document.querySelectorAll('.remover-item').forEach(button => {
-            button.addEventListener('click', function() {
-                this.closest('.carrinho-item').remove();
-                atualizarTotal();
-            });
-        });
 
         function carregarCarrinho() {
             const carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
             const container = document.getElementById('carrinhoItens');
 
             if (carrinho.length === 0) {
-                container.innerHTML = '<p style="text-align: center; color: #666;">Seu carrinho está vazio. <a href="index.html">Continue comprando!</a></p>';
-                atualizarTotal(0, 0, 0);  
+                container.innerHTML = '<p style="text-align:center;color:#666;">Seu carrinho está vazio. <a href="index.html">Continue comprando!</a></p>';
+                atualizarTotal(null);
                 return;
             }
 
-            container.innerHTML = '';  
+            container.innerHTML = '';
             carrinho.forEach((item, index) => {
                 const itemDiv = document.createElement('div');
                 itemDiv.className = 'carrinho-item';
@@ -171,27 +116,25 @@
             });
 
             adicionarEventListeners();
-            atualizarTotal();  
+            atualizarTotal(null);
         }
 
         function adicionarEventListeners() {
-            document.querySelectorAll('.aumentar').forEach(button => {
-                button.addEventListener('click', function() {
-                    const index = parseInt(this.dataset.index);
+            document.querySelectorAll('.aumentar').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const index = parseInt(btn.dataset.index);
                     atualizarQuantidade(index, 1);
                 });
             });
-
-            document.querySelectorAll('.diminuir').forEach(button => {
-                button.addEventListener('click', function() {
-                    const index = parseInt(this.dataset.index);
+            document.querySelectorAll('.diminuir').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const index = parseInt(btn.dataset.index);
                     atualizarQuantidade(index, -1);
                 });
             });
-
-            document.querySelectorAll('.remover-item').forEach(button => {
-                button.addEventListener('click', function() {
-                    const index = parseInt(this.dataset.index);
+            document.querySelectorAll('.remover-item').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const index = parseInt(btn.dataset.index);
                     removerItem(index);
                 });
             });
@@ -201,11 +144,9 @@
             let carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
             if (carrinho[index]) {
                 carrinho[index].quantidade += delta;
-                if (carrinho[index].quantidade <= 0) {
-                    carrinho[index].quantidade = 1;  
-                }
+                if (carrinho[index].quantidade < 1) carrinho[index].quantidade = 1;
                 localStorage.setItem('carrinho', JSON.stringify(carrinho));
-                carregarCarrinho();  
+                carregarCarrinho();
             }
         }
 
@@ -213,41 +154,100 @@
             let carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
             carrinho.splice(index, 1);
             localStorage.setItem('carrinho', JSON.stringify(carrinho));
-            carregarCarrinho();  
+            carregarCarrinho();
         }
 
-        function atualizarTotal() {
+        function atualizarTotal(frete) {
             const carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
             let subtotal = 0;
+            carrinho.forEach(item => subtotal += item.preco * item.quantidade);
 
-            carrinho.forEach(item => {
-                subtotal += item.preco * item.quantidade;
-            });
+            const desconto = subtotal > 100 ? 20 : 0;
 
-            const frete = subtotal > 99.99 ? 0 : 10.00;  
-            const desconto = subtotal > 100 ? 20.00 : 0;  
-            const total = subtotal + frete - desconto;
+            let freteFinal;
+            if (subtotal > 100) freteFinal = 0;
+            else if (frete != null) freteFinal = frete;
+            else freteFinal = '...';
+
+            let total = subtotal;
+            if (freteFinal !== '...') total += freteFinal;
+            total -= desconto;
 
             document.getElementById('subtotal').textContent = `R$ ${subtotal.toFixed(2).replace('.', ',')}`;
-            document.getElementById('frete').textContent = frete === 0 ? 'Grátis' : `R$ ${frete.toFixed(2).replace('.', ',')}`;
-            document.getElementById('desconto').textContent = `-R$ ${desconto.toFixed(2).replace('.', ',')}`;
+            document.getElementById('frete').textContent = freteFinal === 0 ? 'Grátis' : freteFinal === '...' ? '...' : `R$ ${freteFinal.toFixed(2).replace('.', ',')}`;
+            document.getElementById('desconto').textContent = `R$ ${desconto.toFixed(2).replace('.', ',')}`;
             document.getElementById('total').textContent = `R$ ${total.toFixed(2).replace('.', ',')}`;
-
-            console.log('Total atualizado:', { subtotal, frete, desconto, total });
         }
 
-        // Pesquisar ao pressionar Enter
-        document.getElementById('searchInput').addEventListener('keypress', function(e) {
-            if (e.key === 'Enter') {
-                pesquisar();
-            }
-        });
+        async function calcularFrete() {
+    const cep = document.getElementById('cep').value.trim();
+    if (!cep || cep.length !== 8 || isNaN(cep)) {
+        alert('Digite um CEP válido (8 números).');
+        return;
+    }
 
-        // Carregar carrinho quando a página carregar
-        document.addEventListener('DOMContentLoaded', function() {
+    try {
+        document.getElementById('frete').textContent = 'Calculando...';
+        const response = await fetch(`/api/frete/${cep}`);
+        const data = await response.json();
+
+        if (data.success) {
+            const subtotal = JSON.parse(localStorage.getItem('carrinho') || '[]')
+                .reduce((acc, item) => acc + item.preco * item.quantidade, 0);
+
+            let freteFinal = subtotal > 100 ? 0 : data.frete;
+            atualizarTotal(freteFinal);
+            alert(`Frete calculado: R$ ${freteFinal.toFixed(2).replace('.', ',')}`);
+        } else {
+            alert('Erro ao calcular frete.');
+            document.getElementById('frete').textContent = '...';
+        }
+    } catch (err) {
+        alert('Erro ao calcular frete.');
+        document.getElementById('frete').textContent = '...';
+        console.error(err);
+    }
+}
+
+        document.addEventListener('DOMContentLoaded', () => {
             carregarCarrinho();
+            document.getElementById('btnFinalizar').addEventListener('click', async () => {
+                const usuario = (localStorage.getItem('usuarioLogado') || '').trim();
+                if (!usuario) {
+                    alert('Você precisa estar logado para finalizar a compra.');
+                    window.location.href = '/templates/tela_login.html';
+                    return;
+                }
+
+                try {
+                    const carrinho = JSON.parse(localStorage.getItem('carrinho') || '[]');
+                    const subtotalText = document.getElementById('subtotal').textContent.replace('R$ ', '').replace('.', '').replace(',', '.');
+                    const subtotal = parseFloat(subtotalText) || 0;
+                    const freteEl = document.getElementById('frete').textContent;
+                    const frete = freteEl === 'Grátis' ? 0 : freteEl === '...' ? 0 : parseFloat(freteEl.replace('R$ ', '').replace('.', '').replace(',', '.')) || 0;
+                    const totalText = document.getElementById('total').textContent.replace('R$ ', '').replace('.', '').replace(',', '.');
+                    const total = parseFloat(totalText) || 0;
+
+                    const res = await fetch('/api/checkout', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ email: usuario, carrinho, subtotal, frete, total })
+                    });
+                    const body = await res.json().catch(() => null);
+                    if (res.ok) {
+                        alert('Compra finalizada com sucesso!');
+                        localStorage.removeItem('carrinho');
+                        carregarCarrinho();
+                        window.location.href = '/templates/index.html';
+                    } else {
+                        alert((body && (body.error || body.message)) || 'Erro ao finalizar compra');
+                    }
+                } catch (err) {
+                    console.error('Erro no checkout:', err);
+                    alert('Erro ao finalizar compra. Tente novamente.');
+                }
+            });
         });
-        
     </script>
 </body>
 </html>

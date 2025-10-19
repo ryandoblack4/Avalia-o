@@ -7,11 +7,9 @@
     <title>Moda Masculina - Mix-Modas</title>
 </head>
 <body>
-
-    <!-- HEADER -->
     <header>
         <div class="logo">
-            <a href="index.html" style="color: white; text-decoration: none; font-size: 1.5rem; font-weight: 700;">
+            <a href="/templates/index.html" style="color: white; text-decoration: none; font-size: 1.5rem; font-weight: 700;">
                 <img src="/static/css/logo-mixmodas.png" alt="Mix-Modas" class="logo-img">
             </a>
         </div>
@@ -20,104 +18,33 @@
             <button onclick="pesquisar()">Pesquisar</button>
         </div>
         <div class="icons">
-            <a href="lista_desejos.html">❤️ Lista de Desejos</a>
+            <a href="/templates/lista_desejos.html">❤️ Lista de Desejos</a>
             <a href="/templates/tela_login.html">👤 Entrar</a>
-            <a href="carrinho.html">🛒 Seu Carrinho (0)</a>
+            <a href="/templates/carrinho.html">🛒 Seu Carrinho (0)</a>
         </div>
     </header>
 
-       <!-- NAV CATEGORIAS COM DROPDOWN -->
     <nav>
-        <ul>
-            <!-- Todas as Categorias - NÃO CLICÁVEL -->
-            <li>
-                <a href="javascript:void(0)" style="cursor: default;">☰ Todas as categorias</a>
-                <div class="dropdown dropdown-todas">
-                    <ul>
-                        <li><a href="masculino.html">👕 Masculino</a></li>
-                        <li><a href="feminino.html">👚 Feminino</a></li>
-                        <li><a href="infantil.html">👶 Infantil</a></li>
-                        <li><a href="acessorios.html">🕶️ Acessórios</a></li>
-                        <li><a href="calcados.html">👟 Calçados</a></li>
-                        <li><a href="esportivo.html">🏃 Esportivo</a></li>
-                    </ul>
-                </div>
-            </li>
+    <ul>
+      <li><a href="/templates/masculino.html">Masculino</a></li>
+      <li><a href="/templates/feminino.html">Feminino</a></li>
+      <li><a href="/templates/infantil.html">Infantil</a></li>
+    </ul>
+  </nav>
 
-            <!-- Masculino -->
-            <li>
-                <a href="masculino.html">Masculino</a>
-                <div class="dropdown dropdown-masculino">
-                    <ul>
-                        <li><a href="masculino.html?categoria=camisas">👔 Camisas</a></li>
-                        <li><a href="masculino.html?categoria=calcas">👖 Calças</a></li>
-                        <li><a href="masculino.html?categoria=bermudas">🩳 Bermudas</a></li>
-                        <li><a href="masculino.html?categoria=blazers">🥼 Blazers</a></li>
-                        <li><a href="masculino.html?categoria=esportivo">🏃 Esportivo</a></li>
-                    </ul>
-                </div>
-            </li>
-
-            <!-- Feminino -->
-            <li>
-                <a href="feminino.html">Feminino</a>
-                <div class="dropdown dropdown-feminino">
-                    <ul>
-                        <li><a href="feminino.html?categoria=vestidos">👗 Vestidos</a></li>
-                        <li><a href="feminino.html?categoria=blusas">👚 Blusas</a></li>
-                        <li><a href="feminino.html?categoria=calcas">👖 Calças</a></li>
-                        <li><a href="feminino.html?categoria=saias">👡 Saias</a></li>
-                    </ul>
-                </div>
-            </li>
-
-            <!-- Infantil -->
-            <li>
-                <a href="infantil.html">Infantil</a>
-                <div class="dropdown dropdown-infantil">
-                    <ul>
-                        <li><a href="infantil.html?categoria=menino">🚹 Menino</a></li>
-                        <li><a href="infantil.html?categoria=menina">🚺 Menina</a></li>
-                        <li><a href="infantil.html?categoria=calcados-infantil">👟 Calçados</a></li>
-                    </ul>
-                </div>
-            </li>
-
-            <!-- Acessórios -->
-            <li>
-                <a href="acessorios.html">Acessórios</a>
-                <div class="dropdown dropdown-acessorios">
-                    <ul>
-                        <li><a href="acessorios.html?categoria=relogios">⌚ Relógios</a></li>
-                        <li><a href="acessorios.html?categoria=oculos">🕶️ Óculos</a></li>
-                        <li><a href="acessorios.html?categoria=chapeus">🧢 Chapéus</a></li>
-                        <li><a href="acessorios.html?categoria=lenços">🧣 Lenços</a></li>
-                        <li><a href="acessorios.html?categoria=cintos">⛓️ Cintos</a></li>
-                    </ul>
-                </div>
-            </li>
-
-            <li><a href="ofertas.html">🔥 Ofertas</a></li>
-        </ul>
-    </nav>
-
-    <!-- PROMO BAR -->
     <div class="promo-bar">
         🚀 Frete grátis para compras acima de <span>R$99,99</span> 
     </div>
 
-    <!-- BREADCRUMB -->
     <div class="breadcrumb">
-        <a href="index.html">Home</a> > <span>Moda Masculina</span>
+        <a href="/templates/index.html">Home</a> > <span>Moda Masculina</span>
     </div>
 
-    <!-- TÍTULO -->
     <section class="page-title">
-        <h1>Moda Masculina</h1>
+        <h1>🤵 Moda Masculina</h1>
         <p>Estilo e conforto para o homem moderno</p>
     </section>
 
-    <!-- FILTROS -->
     <section class="filters">
         <div class="filter-group">
             <label>Ordenar por:</label>
@@ -150,111 +77,16 @@
         </div>
     </section>
 
-    <!-- PRODUTOS -->
     <section class="produtos-container">
-        <div class="produtos-grid">
-            <!-- Camisas -->
-            <div class="produto-card">
-                <div class="produto-tag">-20%</div>
-                <img src="https://images.unsplash.com/photo-1596755094514-f87e34085b2c?w=300&h=300&fit=crop" alt="Camisa Social" class="produto-imagem">
-                <div class="produto-info">
-                    <h3 class="produto-titulo">Camisa Social Branca</h3>
-                    <p class="produto-preco">R$ 89,90</p>
-                    <p class="produto-parcelamento">ou 3x de R$ 29,97</p>
-                    <div class="produto-acoes">
-                        <button class="btn-carrinho">Adicionar</button>
-                        <button class="btn-favorito">❤️</button>
-                    </div>
-                </div>
-            </div>
+        <div id="produtos-grid" class="produtos-grid" data-categoria="masculino">
 
-            <!-- Calças -->
-            <div class="produto-card">
-                <div class="produto-tag">-15%</div>
-                <img src="https://images.unsplash.com/photo-1542272604-787c3835535d?w=300&h=300&fit=crop" alt="Calça Jeans" class="produto-imagem">
-                <div class="produto-info">
-                    <h3 class="produto-titulo">Calça Jeans Slim</h3>
-                    <p class="produto-preco">R$ 129,90</p>
-                    <p class="produto-parcelamento">ou 4x de R$ 32,48</p>
-                    <div class="produto-acoes">
-                        <button class="btn-carrinho">Adicionar</button>
-                        <button class="btn-favorito">❤️</button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Bermudas -->
-            <div class="produto-card">
-                <div class="produto-tag">-25%</div>
-                <img src="https://images.unsplash.com/photo-1582418702059-97ebafb35d09?w=300&h=300&fit=crop" alt="Bermuda Jeans" class="produto-imagem">
-                <div class="produto-info">
-                    <h3 class="produto-titulo">Bermuda Jeans</h3>
-                    <p class="produto-preco">R$ 69,90</p>
-                    <p class="produto-parcelamento">ou 2x de R$ 34,95</p>
-                    <div class="produto-acoes">
-                        <button class="btn-carrinho">Adicionar</button>
-                        <button class="btn-favorito">❤️</button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Blazers -->
-            <div class="produto-card">
-                <div class="produto-tag">-30%</div>
-                <img src="https://images.unsplash.com/photo-1591047139829-d91aecb6caea?w=300&h=300&fit=crop" alt="Blazer Social" class="produto-imagem">
-                <div class="produto-info">
-                    <h3 class="produto-titulo">Blazer Social Azul</h3>
-                    <p class="produto-preco">R$ 199,90</p>
-                    <p class="produto-parcelamento">ou 5x de R$ 39,98</p>
-                    <div class="produto-acoes">
-                        <button class="btn-carrinho">Adicionar</button>
-                        <button class="btn-favorito">❤️</button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Camiseta Básica -->
-            <div class="produto-card">
-                <div class="produto-tag">-10%</div>
-                <img src="https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=300&h=300&fit=crop" alt="Camiseta Básica" class="produto-imagem">
-                <div class="produto-info">
-                    <h3 class="produto-titulo">Camiseta Básica Preta</h3>
-                    <p class="produto-preco">R$ 39,90</p>
-                    <p class="produto-parcelamento">ou 2x de R$ 19,95</p>
-                    <div class="produto-acoes">
-                        <button class="btn-carrinho">Adicionar</button>
-                        <button class="btn-favorito">❤️</button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Polo -->
-            <div class="produto-card">
-                <div class="produto-tag">-18%</div>
-                <img src="https://images.unsplash.com/photo-1586790170083-2f9ceadc732d?w=300&h=300&fit=crop" alt="Camisa Polo" class="produto-imagem">
-                <div class="produto-info">
-                    <h3 class="produto-titulo">Camisa Polo Azul Marinho</h3>
-                    <p class="produto-preco">R$ 79,90</p>
-                    <p class="produto-parcelamento">ou 3x de R$ 26,63</p>
-                    <div class="produto-acoes">
-                        <button class="btn-carrinho">Adicionar</button>
-                        <button class="btn-favorito">❤️</button>
-                    </div>
-                </div>
-            </div>
         </div>
 
-        <!-- PAGINAÇÃO -->
-        <div class="paginacao">
-            <a href="#">‹</a>
-            <a href="#" class="ativa">1</a>
-            <a href="#">2</a>
-            <a href="#">3</a>
-            <a href="#">›</a>
+        <div id="paginacao" class="paginacao" style="display:none">
+
         </div>
     </section>
 
-    <!-- FOOTER -->
     <footer>
         <div class="footer-content">
             <div class="footer-section">
@@ -294,30 +126,15 @@
             }
         }
 
-        // Pesquisar ao pressionar Enter
         document.getElementById('searchInput').addEventListener('keypress', function(e) {
             if (e.key === 'Enter') {
                 pesquisar();
             }
         });
 
-        // Funcionalidade dos botões
-        document.querySelectorAll('.btn-carrinho').forEach(button => {
-            button.addEventListener('click', function() {
-                const produto = this.closest('.produto-card');
-                const nome = produto.querySelector('.produto-titulo').textContent;
-                alert(`${nome} adicionado ao carrinho!`);
-            });
-        });
-
-        document.querySelectorAll('.btn-favorito').forEach(button => {
-            button.addEventListener('click', function() {
-                const produto = this.closest('.produto-card');
-                const nome = produto.querySelector('.produto-titulo').textContent;
-                alert(`${nome} adicionado aos favoritos!`);
-            });
-        });
     </script>
+
+    <script src="/static/js/categorias_produtos.js"></script>
 
 </body>
 </html>

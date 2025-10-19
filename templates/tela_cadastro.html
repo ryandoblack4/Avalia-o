@@ -67,7 +67,7 @@
         <div class="links-container">
             <a href="/templates/tela_login.html" class="text-link">Já tem uma conta? Entre aqui</a>
             <br>
-            <a href="index.html" class="voltar-link">← Voltar para a loja</a>
+            <a href="/templates/index.html" class="voltar-link">← Voltar para a loja</a>
         </div>
         
         <div id="mensagem"></div>
@@ -85,12 +85,10 @@
             const terms = document.getElementById('terms').checked;
             const mensagem = document.getElementById('mensagem');
 
-            // Reset message
             mensagem.style.color = '#d6005d';
             mensagem.textContent = '';
             mensagem.style.background = 'transparent';
 
-            // Validation
             if (!firstName) {
                 mensagem.textContent = 'Por favor, insira seu nome';
                 return;
@@ -121,7 +119,6 @@
                 return;
             }
 
-            // Simulate registration
             const userData = {
                 firstName,
                 lastName,
