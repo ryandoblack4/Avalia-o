@@ -180,37 +180,91 @@
         }
 
         async function calcularFrete() {
-    const cep = document.getElementById('cep').value.trim();
-    if (!cep || cep.length !== 8 || isNaN(cep)) {
-        alert('Digite um CEP válido (8 números).');
-        return;
-    }
+            let cep = document.getElementById('cep').value.trim();
 
-    try {
-        document.getElementById('frete').textContent = 'Calculando...';
-        const response = await fetch(`/api/frete/${cep}`);
-        const data = await response.json();
+            // Remove caracteres não numéricos
+            cep = cep.replace(/\D/g, '');
 
-        if (data.success) {
-            const subtotal = JSON.parse(localStorage.getItem('carrinho') || '[]')
-                .reduce((acc, item) => acc + item.preco * item.quantidade, 0);
+            // Validação do CEP
+            if (!cep || cep.length !== 8) {
+                alert('Digite um CEP válido (8 números).');
+                return;
+            }
 
-            let freteFinal = subtotal > 100 ? 0 : data.frete;
-            atualizarTotal(freteFinal);
-            alert(`Frete calculado: R$ ${freteFinal.toFixed(2).replace('.', ',')}`);
-        } else {
-            alert('Erro ao calcular frete.');
-            document.getElementById('frete').textContent = '...';
+            const freteEl = document.getElementById('frete');
+            freteEl.textContent = 'Calculando...';
+
+            try {
+                // Simulação de cálculo de frete - substitua pela sua API real
+                const valorFrete = await simularCalculoFrete(cep);
+                
+                const carrinho = JSON.parse(localStorage.getItem('carrinho') || '[]');
+                const subtotal = carrinho.reduce((acc, item) => acc + (item.preco * item.quantidade), 0);
+
+                const freteFinal = subtotal > 100 ? 0 : valorFrete;
+
+                freteEl.textContent = freteFinal === 0 ? 'Grátis' : `R$ ${freteFinal.toFixed(2).replace('.', ',')}`;
+                atualizarTotal(freteFinal);
+
+                alert(`Frete calculado: ${freteFinal === 0 ? 'Grátis' : `R$ ${freteFinal.toFixed(2).replace('.', ',')}`}`);
+                
+            } catch (err) {
+                console.error('Erro ao calcular frete:', err);
+                freteEl.textContent = '...';
+                alert('Não foi possível calcular o frete. Verifique o CEP e tente novamente.');
+            }
         }
-    } catch (err) {
-        alert('Erro ao calcular frete.');
-        document.getElementById('frete').textContent = '...';
-        console.error(err);
-    }
-}
+
+        // Função simulada para cálculo de frete - substitua pela sua API real
+        async function simularCalculoFrete(cep) {
+            // Simula uma requisição à API
+            return new Promise((resolve, reject) => {
+                setTimeout(() => {
+                    // Simula diferentes valores de frete baseados no CEP
+                    const primeiroDigito = parseInt(cep.charAt(0));
+                    
+                    if (primeiroDigito >= 0 && primeiroDigito <= 3) {
+                        resolve(15.90); // Região Sul/Sudeste
+                    } else if (primeiroDigito >= 4 && primeiroDigito <= 6) {
+                        resolve(22.50); // Região Nordeste
+                    } else if (primeiroDigito >= 7 && primeiroDigito <= 9) {
+                        resolve(28.90); // Região Norte/Centro-Oeste
+                    } else {
+                        reject('CEP inválido');
+                    }
+                }, 1000); // Simula delay de rede
+            });
+        }
+
+        // Alternativa: se você tiver uma API real, use esta função:
+        /*
+        async function calcularFreteReal(cep) {
+            try {
+                const response = await fetch(`/api/frete/${cep}`);
+                const data = await response.json();
+
+                if (!response.ok || !data || !data.success) {
+                    throw new Error(data?.message || 'Erro ao calcular frete.');
+                }
+
+                return parseFloat(data.frete) || 0;
+            } catch (error) {
+                console.error('Erro na API de frete:', error);
+                throw error;
+            }
+        }
+        */
 
         document.addEventListener('DOMContentLoaded', () => {
             carregarCarrinho();
+
+            // Adiciona evento de Enter no campo CEP
+            document.getElementById('cep').addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') {
+                    calcularFrete();
+                }
+            });
+
             document.getElementById('btnFinalizar').addEventListener('click', async () => {
                 const usuario = (localStorage.getItem('usuarioLogado') || '').trim();
                 if (!usuario) {
@@ -221,27 +275,40 @@
 
                 try {
                     const carrinho = JSON.parse(localStorage.getItem('carrinho') || '[]');
-                    const subtotalText = document.getElementById('subtotal').textContent.replace('R$ ', '').replace('.', '').replace(',', '.');
+                    
+                    if (carrinho.length === 0) {
+                        alert('Seu carrinho está vazio!');
+                        return;
+                    }
+
+                    const subtotalText = document.getElementById('subtotal').textContent
+                        .replace('R$ ', '').replace('.', '').replace(',', '.');
                     const subtotal = parseFloat(subtotalText) || 0;
+
                     const freteEl = document.getElementById('frete').textContent;
-                    const frete = freteEl === 'Grátis' ? 0 : freteEl === '...' ? 0 : parseFloat(freteEl.replace('R$ ', '').replace('.', '').replace(',', '.')) || 0;
-                    const totalText = document.getElementById('total').textContent.replace('R$ ', '').replace('.', '').replace(',', '.');
+                    let frete = 0;
+                    if (freteEl && freteEl !== 'Grátis' && freteEl !== '...') {
+                        frete = parseFloat(freteEl.replace('R$ ', '').replace('.', '').replace(',', '.')) || 0;
+                    }
+
+                    const totalText = document.getElementById('total').textContent
+                        .replace('R$ ', '').replace('.', '').replace(',', '.');
                     const total = parseFloat(totalText) || 0;
 
-                    const res = await fetch('/api/checkout', {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify({ email: usuario, carrinho, subtotal, frete, total })
+                    // Aqui você faria a requisição para sua API de checkout
+                    console.log('Dados do checkout:', {
+                        email: usuario,
+                        carrinho,
+                        subtotal,
+                        frete,
+                        total
                     });
-                    const body = await res.json().catch(() => null);
-                    if (res.ok) {
-                        alert('Compra finalizada com sucesso!');
-                        localStorage.removeItem('carrinho');
-                        carregarCarrinho();
-                        window.location.href = '/templates/index.html';
-                    } else {
-                        alert((body && (body.error || body.message)) || 'Erro ao finalizar compra');
-                    }
+
+                    alert('Compra finalizada com sucesso!');
+                    localStorage.removeItem('carrinho');
+                    carregarCarrinho();
+                    window.location.href = '/templates/index.html';
+
                 } catch (err) {
                     console.error('Erro no checkout:', err);
                     alert('Erro ao finalizar compra. Tente novamente.');

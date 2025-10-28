@@ -5,72 +5,27 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/static/css/style_categorias.css">
     <title>Acessórios - Mix-Modas</title>
-    <style>
-        /* ESTILOS PARA SUBCATEGORIAS */
-        .subcategorias {
-            padding: 20px 0;
-            background: #f8f9fa;
-            margin: 20px 0;
-        }
-        
-        .subcategoria-grid {
-            display: grid;
-            grid-template-columns: repeat(6, 1fr);
-            gap: 15px;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-        
-        .subcategoria-card {
-            background: white;
-            padding: 20px 10px;
-            border-radius: 10px;
-            text-align: center;
-            text-decoration: none;
-            color: #333;
-            transition: all 0.3s ease;
-            border: 2px solid transparent;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-        }
-        
-        .subcategoria-card:hover {
-            transform: translateY(-5px);
-            border-color: #007bff;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-        }
-        
-        .subcategoria-icon {
-            font-size: 2rem;
-            margin-bottom: 10px;
-        }
-        
-        .subcategoria-card span {
-            font-weight: 600;
-            font-size: 0.9rem;
-        }
-        
-        /* RESPONSIVO */
-        @media (max-width: 768px) {
-            .subcategoria-grid {
-                grid-template-columns: repeat(3, 1fr);
-                gap: 10px;
-            }
-        }
-        
-        @media (max-width: 480px) {
-            .subcategoria-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-    </style>
 </head>
 <body>
+    <button class="categories-toggle" onclick="toggleSidebar()">☰ Todas as Categorias</button>
 
-    <!-- HEADER -->
+    <!-- Barra lateral de categorias -->
+    <div class="categories-sidebar" id="categoriesSidebar">
+        <h3>🛍️ Categorias</h3>
+        <ul class="categories-list">
+            <li><a href="/templates/index.html">🏠 Página Inicial</a></li>
+            <li><a href="/templates/feminino.html">👚 Feminino</a></li>
+            <li><a href="/templates/masculino.html">👕 Masculino</a></li>
+            <li><a href="/templates/infantil.html">👶 Infantil</a></li>
+            <li><a href="/templates/acessorios.html" class="active">💎 Acessórios</a></li>
+        </ul>
+    </div>
+
+    <div class="sidebar-overlay" id="sidebarOverlay" onclick="closeSidebar()"></div>
+
     <header>
         <div class="logo">
-            <a href="index.html" style="color: white; text-decoration: none; font-size: 1.5rem; font-weight: 700;">
+            <a href="/templates/index.html" style="color: white; text-decoration: none;">
                 <img src="/static/css/logo-mixmodas.png" alt="Mix-Modas" class="logo-img">
             </a>
         </div>
@@ -79,251 +34,75 @@
             <button onclick="pesquisar()">Pesquisar</button>
         </div>
         <div class="icons">
-            <a href="lista_desejos.html">❤️ Lista de Desejos</a>
-            <a href="/templates/tela_login.html">👤 Entrar</a>
-            <a href="carrinho.html">🛒 Seu Carrinho (0)</a>
+            <a href="/templates/lista_desejos.html" id="listaDesejosLink">❤️ Lista de Desejos (0)</a>
+            <a href="/templates/tela_login.html" id="loginLink">👤 Entrar</a>
+            <a href="/templates/carrinho.html" id="carrinhoLink">🛒 Carrinho (0)</a>
         </div>
     </header>
 
-    <!-- NAV CATEGORIAS -->
     <nav>
         <ul>
-            <li>
-                <a href="javascript:void(0)" style="cursor: default;">☰ Todas as categorias</a>
-                <div class="dropdown dropdown-todas">
-                    <ul>
-                        <li><a href="masculino.html">👕 Masculino</a></li>
-                        <li><a href="feminino.html">👚 Feminino</a></li>
-                        <li><a href="infantil.html">👶 Infantil</a></li>
-                        <li><a href="acessorios.html">🕶️ Acessórios</a></li>
-                        <li><a href="calcados.html">👟 Calçados</a></li>
-                        <li><a href="esportivo.html">🏃 Esportivo</a></li>
-                    </ul>
-                </div>
-            </li>
-            <li><a href="masculino.html">Masculino</a></li>
-            <li><a href="feminino.html">Feminino</a></li>
-            <li><a href="infantil.html">Infantil</a></li>
-            <li><a href="acessorios.html">Acessórios</a></li>
-            <li><a href="ofertas.html">🔥 Ofertas</a></li>
+            <li><a href="/templates/masculino.html">Masculino</a></li>
+            <li><a href="/templates/feminino.html">Feminino</a></li>
+            <li><a href="/templates/infantil.html">Infantil</a></li>
+            <li><a href="/templates/acessorios.html">Acessórios</a></li>
         </ul>
     </nav>
 
-    <!-- PROMO BAR -->
     <div class="promo-bar">
         🚀 Frete grátis para compras acima de <span>R$99,99</span> 
     </div>
 
-    <!-- BREADCRUMB -->
     <div class="breadcrumb">
-        <a href="index.html">Home</a> > <span>Acessórios</span>
+        <a href="/templates/index.html">Home</a> > <span>Acessórios</span>
     </div>
 
-    <!-- TÍTULO -->
     <section class="page-title">
-        <h1>🕶️ Acessórios</h1>
-        <p>Complete seu look com os melhores acessórios</p>
+        <h1>💎 Acessórios</h1>
+        <p>Complete seu look com nossos acessórios exclusivos</p>
     </section>
 
-    <!-- SUBCATEGORIAS CORRIGIDAS -->
-    <section class="subcategorias">
-        <div class="subcategoria-grid">
-            <a href="acessorios.html?categoria=relogios" class="subcategoria-card">
-                <div class="subcategoria-icon">⌚</div>
-                <span>Relógios</span>
-            </a>
-            <a href="acessorios.html?categoria=oculos" class="subcategoria-card">
-                <div class="subcategoria-icon">🕶️</div>
-                <span>Óculos</span>
-            </a>
-            <a href="acessorios.html?categoria=chapeus" class="subcategoria-card">
-                <div class="subcategoria-icon">🧢</div>
-                <span>Chapéus</span>
-            </a>
-            <a href="acessorios.html?categoria=bolsas" class="subcategoria-card">
-                <div class="subcategoria-icon">👜</div>
-                <span>Bolsas</span>
-            </a>
-            <a href="acessorios.html?categoria=joias" class="subcategoria-card">
-                <div class="subcategoria-icon">💎</div>
-                <span>Joias</span>
-            </a>
-            <a href="acessorios.html?categoria=cintos" class="subcategoria-card">
-                <div class="subcategoria-icon">⛓️</div>
-                <span>Cintos</span>
-            </a>
-        </div>
-    </section>
-
-    <!-- FILTROS -->
     <section class="filters">
         <div class="filter-group">
             <label>Ordenar por:</label>
-            <select>
+            <select id="ordenarSelect">
                 <option>Mais vendidos</option>
                 <option>Menor preço</option>
                 <option>Maior preço</option>
                 <option>Lançamentos</option>
             </select>
-        </div>
+        </div>  
         <div class="filter-group">
-            <label>Categoria:</label>
-            <select>
+            <label>Tipo:</label>
+            <select id="tipoSelect">
                 <option>Todos</option>
-                <option>Relógios</option>
+                <option>Bolsa</option>
                 <option>Óculos</option>
-                <option>Chapéus</option>
-                <option>Bolsas</option>
-                <option>Joias</option>
+                <option>Joia</option>
+                <option>Cinto</option>
+                <option>Chapéu</option>
+                <option>Lenço</option>
             </select>
         </div>
         <div class="filter-group">
-            <label>Material:</label>
-            <select>
-                <option>Todos</option>
-                <option>Couro</option>
-                <option>Metal</option>
-                <option>Acetato</option>
-                <option>Tecido</option>
+            <label>Cor:</label>
+            <select id="corSelect">
+                <option>Todas</option>
+                <option>Preto</option>
+                <option>Branco</option>
+                <option>Marrom</option>
+                <option>Prata</option>
+                <option>Azul</option>
+                <option>Bege</option>
             </select>
         </div>
     </section>
 
-    <!-- PRODUTOS -->
     <section class="produtos-container">
-        <div class="produtos-grid">
-            <!-- Relógio 1 -->
-            <div class="produto-card">
-                <div class="produto-tag">-25%</div>
-                <img src="https://images.unsplash.com/photo-1523170335258-f5ed11844a49?w=300&h=300&fit=crop" alt="Relógio Premium" class="produto-imagem">
-                <div class="produto-info">
-                    <h3 class="produto-titulo">Relógio Analógico Premium</h3>
-                    <p class="produto-preco">R$ 299,90</p>
-                    <p class="produto-parcelamento">ou 6x de R$ 49,98</p>
-                    <div class="produto-acoes">
-                        <button class="btn-carrinho">Adicionar</button>
-                        <button class="btn-favorito">❤️</button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Óculos de Sol -->
-            <div class="produto-card">
-                <div class="produto-tag">-30%</div>
-                <img src="https://images.unsplash.com/photo-1572635196237-14b3f281503f?w=300&h=300&fit=crop" alt="Óculos de Sol" class="produto-imagem">
-                <div class="produto-info">
-                    <h3 class="produto-titulo">Óculos de Sol Vintage</h3>
-                    <p class="produto-preco">R$ 159,90</p>
-                    <p class="produto-parcelamento">ou 4x de R$ 39,98</p>
-                    <div class="produto-acoes">
-                        <button class="btn-carrinho">Adicionar</button>
-                        <button class="btn-favorito">❤️</button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Chapéu -->
-            <div class="produto-card">
-                <div class="produto-tag">-15%</div>
-                <img src="https://images.unsplash.com/photo-1534215754734-18e55d13e346?w=300&h=300&fit=crop" alt="Chapéu Panamá" class="produto-imagem">
-                <div class="produto-info">
-                    <h3 class="produto-titulo">Chapéu Panamá Elegante</h3>
-                    <p class="produto-preco">R$ 89,90</p>
-                    <p class="produto-parcelamento">ou 3x de R$ 29,97</p>
-                    <div class="produto-acoes">
-                        <button class="btn-carrinho">Adicionar</button>
-                        <button class="btn-favorito">❤️</button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Bolsa -->
-            <div class="produto-card">
-                <div class="produto-tag">-20%</div>
-                <img src="https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=300&h=300&fit=crop" alt="Bolsa Couro" class="produto-imagem">
-                <div class="produto-info">
-                    <h3 class="produto-titulo">Bolsa de Couro Legítimo</h3>
-                    <p class="produto-preco">R$ 199,90</p>
-                    <p class="produto-parcelamento">ou 5x de R$ 39,98</p>
-                    <div class="produto-acoes">
-                        <button class="btn-carrinho">Adicionar</button>
-                        <button class="btn-favorito">❤️</button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Colar -->
-            <div class="produto-card">
-                <div class="produto-tag">-10%</div>
-                <img src="https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=300&h=300&fit=crop" alt="Colar Prata" class="produto-imagem">
-                <div class="produto-info">
-                    <h3 class="produto-titulo">Colar em Prata 925</h3>
-                    <p class="produto-preco">R$ 129,90</p>
-                    <p class="produto-parcelamento">ou 3x de R$ 43,30</p>
-                    <div class="produto-acoes">
-                        <button class="btn-carrinho">Adicionar</button>
-                        <button class="btn-favorito">❤️</button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Pulseira -->
-            <div class="produto-card">
-                <div class="produto-tag">LANÇAMENTO</div>
-                <img src="https://images.unsplash.com/photo-1611591437281-460bfbe1220a?w=300&h=300&fit=crop" alt="Pulseira Couro" class="produto-imagem">
-                <div class="produto-info">
-                    <h3 class="produto-titulo">Pulseira de Couro Artesanal</h3>
-                    <p class="produto-preco">R$ 59,90</p>
-                    <p class="produto-parcelamento">ou 2x de R$ 29,95</p>
-                    <div class="produto-acoes">
-                        <button class="btn-carrinho">Adicionar</button>
-                        <button class="btn-favorito">❤️</button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Cinto -->
-            <div class="produto-card">
-                <div class="produto-tag">-18%</div>
-                <img src="https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa?w=300&h=300&fit=crop" alt="Cinto Couro" class="produto-imagem">
-                <div class="produto-info">
-                    <h3 class="produto-titulo">Cinto de Couro Masculino</h3>
-                    <p class="produto-preco">R$ 79,90</p>
-                    <p class="produto-parcelamento">ou 3x de R$ 26,63</p>
-                    <div class="produto-acoes">
-                        <button class="btn-carrinho">Adicionar</button>
-                        <button class="btn-favorito">❤️</button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Brincos -->
-            <div class="produto-card">
-                <div class="produto-tag">-12%</div>
-                <img src="https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?w=300&h=300&fit=crop" alt="Brincos Prata" class="produto-imagem">
-                <div class="produto-info">
-                    <h3 class="produto-titulo">Brincos em Prata 925</h3>
-                    <p class="produto-preco">R$ 69,90</p>
-                    <p class="produto-parcelamento">ou 2x de R$ 34,95</p>
-                    <div class="produto-acoes">
-                        <button class="btn-carrinho">Adicionar</button>
-                        <button class="btn-favorito">❤️</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- PAGINAÇÃO -->
-        <div class="paginacao">
-            <a href="#">‹</a>
-            <a href="#" class="ativa">1</a>
-            <a href="#">2</a>
-            <a href="#">3</a>
-            <a href="#">›</a>
-        </div>
+        <div id="produtos-grid" class="produtos-grid" data-categoria="acessorios"></div>
+        <div id="paginacao" class="paginacao" style="display:none"></div>
     </section>
 
-    <!-- FOOTER -->
     <footer>
         <div class="footer-content">
             <div class="footer-section">
@@ -351,10 +130,12 @@
             </div>
         </div>
         <div class="footer-bottom">
-            <p>&copy; 2025 Mix-Modas - Todos os direitos reservados</p>
+            <p>© 2025 Mix-Modas - Todos os direitos reservados</p>
         </div>
     </footer>
 
+    <script src="/static/js/categorias_produtos.js"></script>
+    <script src="/static/js/global.js"></script>
     <script>
         function pesquisar() {
             const termo = document.getElementById('searchInput').value;
@@ -369,22 +150,34 @@
             }
         });
 
-        document.querySelectorAll('.btn-carrinho').forEach(button => {
-            button.addEventListener('click', function() {
-                const produto = this.closest('.produto-card');
-                const nome = produto.querySelector('.produto-titulo').textContent;
-                alert(`${nome} adicionado ao carrinho!`);
-            });
+        // Funções para controlar a barra lateral
+        function toggleSidebar() {
+            const sidebar = document.getElementById('categoriesSidebar');
+            const overlay = document.getElementById('sidebarOverlay');
+            sidebar.classList.toggle('active');
+            overlay.classList.toggle('active');
+        }
+
+        function closeSidebar() {
+            const sidebar = document.getElementById('categoriesSidebar');
+            const overlay = document.getElementById('sidebarOverlay');
+            sidebar.classList.remove('active');
+            overlay.classList.remove('active');
+        }
+
+        // Fechar sidebar ao pressionar ESC
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeSidebar();
+            }
         });
 
-        document.querySelectorAll('.btn-favorito').forEach(button => {
-            button.addEventListener('click', function() {
-                const produto = this.closest('.produto-card');
-                const nome = produto.querySelector('.produto-titulo').textContent;
-                alert(`${nome} adicionado aos favoritos!`);
+        // Fechar sidebar ao clicar em um link
+        document.addEventListener('DOMContentLoaded', function() {
+            document.querySelectorAll('.categories-list a').forEach(link => {
+                link.addEventListener('click', closeSidebar);
             });
         });
     </script>
-
 </body>
 </html>

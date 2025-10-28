@@ -7,9 +7,25 @@
     <title>Moda Feminina - Mix-Modas</title>
 </head>
 <body>
+    <button class="categories-toggle" onclick="toggleSidebar()">☰ Todas as Categorias</button>
+
+    <!-- Barra lateral de categorias -->
+    <div class="categories-sidebar" id="categoriesSidebar">
+        <h3>🛍️ Categorias</h3>
+        <ul class="categories-list">
+            <li><a href="/templates/index.html">🏠 Página Inicial</a></li>
+            <li><a href="/templates/feminino.html" class="active">👚 Feminino</a></li>
+            <li><a href="/templates/masculino.html">👕 Masculino</a></li>
+            <li><a href="/templates/infantil.html">👶 Infantil</a></li>
+            <li><a href="/templates/acessorios.html">💎 Acessórios</a></li>
+        </ul>
+    </div>
+
+    <div class="sidebar-overlay" id="sidebarOverlay" onclick="closeSidebar()"></div>
+
     <header>
         <div class="logo">
-            <a href="/templates/index.html" style="color: white; text-decoration: none; font-size: 1.5rem; font-weight: 700;">
+            <a href="/templates/index.html" style="color: white; text-decoration: none;">
                 <img src="/static/css/logo-mixmodas.png" alt="Mix-Modas" class="logo-img">
             </a>
         </div>
@@ -19,8 +35,8 @@
         </div>
         <div class="icons">
             <a href="/templates/lista_desejos.html" id="listaDesejosLink">❤️ Lista de Desejos (0)</a>
-            <a href="/templates/tela_login.html">👤 Entrar</a>
-            <a href="/templates/carrinho.html" id="carrinhoLink">🛒 Seu Carrinho (0)</a>
+            <a href="/templates/tela_login.html" id="loginLink">👤 Entrar</a>
+            <a href="/templates/carrinho.html" id="carrinhoLink">🛒 Carrinho (0)</a>
         </div>
     </header>
 
@@ -29,6 +45,7 @@
             <li><a href="/templates/masculino.html">Masculino</a></li>
             <li><a href="/templates/feminino.html">Feminino</a></li>
             <li><a href="/templates/infantil.html">Infantil</a></li>
+            <li><a href="/templates/acessorios.html">Acessórios</a></li>
         </ul>
     </nav>
 
@@ -80,11 +97,8 @@
     </section>
 
     <section class="produtos-container">
-        <div id="produtos-grid" class="produtos-grid" data-categoria="feminino">
-        </div>
-
-        <div id="paginacao" class="paginacao" style="display:none">
-        </div>
+        <div id="produtos-grid" class="produtos-grid" data-categoria="feminino"></div>
+        <div id="paginacao" class="paginacao" style="display:none"></div>
     </section>
 
     <footer>
@@ -118,6 +132,8 @@
         </div>
     </footer>
 
+    <script src="/static/js/categorias_produtos.js"></script>
+    <script src="/static/js/global.js"></script>
     <script>
         function pesquisar() {
             const termo = document.getElementById('searchInput').value;
@@ -131,9 +147,35 @@
                 pesquisar();
             }
         });
+
+        // Funções para controlar a barra lateral
+        function toggleSidebar() {
+            const sidebar = document.getElementById('categoriesSidebar');
+            const overlay = document.getElementById('sidebarOverlay');
+            sidebar.classList.toggle('active');
+            overlay.classList.toggle('active');
+        }
+
+        function closeSidebar() {
+            const sidebar = document.getElementById('categoriesSidebar');
+            const overlay = document.getElementById('sidebarOverlay');
+            sidebar.classList.remove('active');
+            overlay.classList.remove('active');
+        }
+
+        // Fechar sidebar ao pressionar ESC
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeSidebar();
+            }
+        });
+
+        // Fechar sidebar ao clicar em um link
+        document.addEventListener('DOMContentLoaded', function() {
+            document.querySelectorAll('.categories-list a').forEach(link => {
+                link.addEventListener('click', closeSidebar);
+            });
+        });
     </script>
-
-    <script src="/static/js/categorias_produtos.js"></script>
-
 </body>
 </html>
