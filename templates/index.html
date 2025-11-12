@@ -217,27 +217,29 @@
         });
 
       function exibirProdutos(produtos) {
-        if (!produtos.length) {
-          container.innerHTML = '<p class="aviso-vazio">Nenhum produto cadastrado ainda.</p>';
-          return;
-        }
+  if (!produtos.length) {
+    container.innerHTML = '<p class="aviso-vazio">Nenhum produto cadastrado ainda.</p>';
+    return;
+  }
 
-        container.innerHTML = produtos.map(prod => `
-          <div class="produto-card">
-            <div class="produto-imagem">
-              <img src="${prod.imagem || '/static/img/sem-foto.png'}" alt="${prod.nome}">
-            </div>
-            <div class="produto-info">
-              <h3 class="produto-nome">${prod.nome}</h3>
-              <p class="produto-preco">R$ ${prod.preco.toFixed(2)}</p>
-              <div class="botoes-produto">
-                <button class="btn-adicionar" onclick="adicionarAoCarrinho(${JSON.stringify(prod).replace(/"/g, '&quot;')})">Adicionar</button>
-                <button class="btn-desejo">❤</button>
-              </div>
-            </div>
-          </div>
-        `).join('');
-      }
+  container.innerHTML = produtos.map(prod => `
+    <div class="produto-card" onclick="verDetalhes(${prod.id})">
+      <div class="produto-imagem">
+        <img src="${prod.imagem || '/static/img/sem-foto.png'}" alt="${prod.nome}">
+      </div>
+      <div class="produto-info">
+        <h3 class="produto-nome">${prod.nome}</h3>
+        <p class="produto-preco">R$ ${prod.preco.toFixed(2)}</p>
+      </div>
+    </div>
+  `).join('');
+}
+
+// nova função
+function verDetalhes(id) {
+  localStorage.setItem('produtoSelecionado', id);
+  window.location.href = '/templates/detalhes_produto.html';
+}
     });
   </script>
 </body>
